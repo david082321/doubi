@@ -20,11 +20,11 @@ aria2c="/usr/bin/aria2c"
 Crontab_file="/usr/bin/crontab"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-Info="${Green_font_prefix}[信息]${Font_color_suffix}"
-Error="${Red_font_prefix}[错误]${Font_color_suffix}"
+Info="${Green_font_prefix}[訊息]${Font_color_suffix}"
+Error="${Red_font_prefix}[錯誤]${Font_color_suffix}"
 Tip="${Green_font_prefix}[注意]${Font_color_suffix}"
 
-#检查系统
+#檢查系統
 check_sys(){
 	if [[ -f /etc/redhat-release ]]; then
 		release="centos"
@@ -44,21 +44,21 @@ check_sys(){
 	bit=`uname -m`
 }
 check_installed_status(){
-	[[ ! -e ${aria2c} ]] && echo -e "${Error} Aria2 没有安装，请检查 !" && exit 1
-	[[ ! -e ${aria2_conf} ]] && echo -e "${Error} Aria2 配置文件不存在，请检查 !" && [[ $1 != "un" ]] && exit 1
+	[[ ! -e ${aria2c} ]] && echo -e "${Error} Aria2 沒有安裝，請檢查 !" && exit 1
+	[[ ! -e ${aria2_conf} ]] && echo -e "${Error} Aria2 設定檔案不存在，請檢查 !" && [[ $1 != "un" ]] && exit 1
 }
 check_crontab_installed_status(){
 	if [[ ! -e ${Crontab_file} ]]; then
-		echo -e "${Error} Crontab 没有安装，开始安装..."
+		echo -e "${Error} Crontab 沒有安裝，開始安裝..."
 		if [[ ${release} == "centos" ]]; then
 			yum install crond -y
 		else
 			apt-get install cron -y
 		fi
 		if [[ ! -e ${Crontab_file} ]]; then
-			echo -e "${Error} Crontab 安装失败，请检查！" && exit 1
+			echo -e "${Error} Crontab 安裝失敗，請檢查！" && exit 1
 		else
-			echo -e "${Info} Crontab 安装成功！"
+			echo -e "${Info} Crontab 安裝成功！"
 		fi
 	fi
 }
@@ -68,11 +68,11 @@ check_pid(){
 check_new_ver(){
 	aria2_new_ver=$(wget --no-check-certificate -qO- https://api.github.com/repos/q3aql/aria2-static-builds/releases | grep -o '"tag_name": ".*"' |head -n 1| sed 's/"//g;s/v//g' | sed 's/tag_name: //g')
 	if [[ -z ${aria2_new_ver} ]]; then
-		echo -e "${Error} Aria2 最新版本获取失败，请手动获取最新版本号[ https://github.com/q3aql/aria2-static-builds/releases ]"
-		stty erase '^H' && read -p "请输入版本号 [ 格式如 1.33.1 ] :" aria2_new_ver
+		echo -e "${Error} Aria2 最新版本獲取失敗，請手動獲取最新版本號[ https://github.com/q3aql/aria2-static-builds/releases ]"
+		stty erase '^H' && read -p "請輸入版本號 [ 格式如 1.33.1 ] :" aria2_new_ver
 		[[ -z "${aria2_new_ver}" ]] && echo "取消..." && exit 1
 	else
-		echo -e "${Info} 检测到 Aria2 最新版本为 [ ${aria2_new_ver} ]"
+		echo -e "${Info} 檢測到 Aria2 最新版本為 [ ${aria2_new_ver} ]"
 	fi
 }
 Download_aria2(){
@@ -88,43 +88,43 @@ Download_aria2(){
 		wget -N --no-check-certificate "https://github.com/q3aql/aria2-static-builds/releases/download/v${aria2_new_ver}/aria2-${aria2_new_ver}-linux-gnu-32bit-build1.tar.bz2"
 		Aria2_Name="aria2-${aria2_new_ver}-linux-gnu-32bit-build1"
 	fi
-	[[ ! -e "${Aria2_Name}.tar.bz2" ]] && echo -e "${Error} Aria2 压缩包下载失败 !" && exit 1
+	[[ ! -e "${Aria2_Name}.tar.bz2" ]] && echo -e "${Error} Aria2 壓縮包下載失敗 !" && exit 1
 	tar jxvf "${Aria2_Name}.tar.bz2"
-	[[ ! -e "/usr/local/${Aria2_Name}" ]] && echo -e "${Error} Aria2 解压失败 !" && rm -rf "${Aria2_Name}.tar.bz2" && exit 1
+	[[ ! -e "/usr/local/${Aria2_Name}" ]] && echo -e "${Error} Aria2 解壓失敗 !" && rm -rf "${Aria2_Name}.tar.bz2" && exit 1
 	mv "/usr/local/${Aria2_Name}" "${Folder}"
-	[[ ! -e "${Folder}" ]] && echo -e "${Error} Aria2 文件夹重命名失败 !" && rm -rf "${Aria2_Name}.tar.bz2" && rm -rf "/usr/local/${Aria2_Name}" && exit 1
+	[[ ! -e "${Folder}" ]] && echo -e "${Error} Aria2 資料夾重新命名失敗 !" && rm -rf "${Aria2_Name}.tar.bz2" && rm -rf "/usr/local/${Aria2_Name}" && exit 1
 	rm -rf "${Aria2_Name}.tar.bz2"
 	cd "${Folder}"
 	make install
-	[[ ! -e ${aria2c} ]] && echo -e "${Error} Aria2 主程序安装失败！" && rm -rf "${Folder}" && exit 1
+	[[ ! -e ${aria2c} ]] && echo -e "${Error} Aria2 主程式安裝失敗！" && rm -rf "${Folder}" && exit 1
 	chmod +x aria2c
-	echo -e "${Info} Aria2 主程序安装完毕！开始下载配置文件..."
+	echo -e "${Info} Aria2 主程式安裝完畢！開始下載設定檔案..."
 }
 Download_aria2_conf(){
 	mkdir "${file}" && cd "${file}"
 	wget --no-check-certificate -N "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/Aria2/aria2.conf"
-	[[ ! -s "aria2.conf" ]] && echo -e "${Error} Aria2 配置文件下载失败 !" && rm -rf "${file}" && exit 1
+	[[ ! -s "aria2.conf" ]] && echo -e "${Error} Aria2 設定檔案下載失敗 !" && rm -rf "${file}" && exit 1
 	wget --no-check-certificate -N "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/Aria2/dht.dat"
-	[[ ! -s "dht.dat" ]] && echo -e "${Error} Aria2 DHT文件下载失败 !" && rm -rf "${file}" && exit 1
+	[[ ! -s "dht.dat" ]] && echo -e "${Error} Aria2 DHT檔案下載失敗 !" && rm -rf "${file}" && exit 1
 	echo '' > aria2.session
 	sed -i 's/^rpc-secret=DOUBIToyo/rpc-secret='$(date +%s%N | md5sum | head -c 20)'/g' ${aria2_conf}
 }
 Service_aria2(){
 	if [[ ${release} = "centos" ]]; then
 		if ! wget --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/aria2_centos -O /etc/init.d/aria2; then
-			echo -e "${Error} Aria2服务 管理脚本下载失败 !" && exit 1
+			echo -e "${Error} Aria2服務 管理腳本下載失敗 !" && exit 1
 		fi
 		chmod +x /etc/init.d/aria2
 		chkconfig --add aria2
 		chkconfig aria2 on
 	else
 		if ! wget --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/aria2_debian -O /etc/init.d/aria2; then
-			echo -e "${Error} Aria2服务 管理脚本下载失败 !" && exit 1
+			echo -e "${Error} Aria2服務 管理腳本下載失敗 !" && exit 1
 		fi
 		chmod +x /etc/init.d/aria2
 		update-rc.d -f aria2 defaults
 	fi
-	echo -e "${Info} Aria2服务 管理脚本下载完成 !"
+	echo -e "${Info} Aria2服務 管理腳本下載完成 !"
 }
 Installation_dependency(){
 	if [[ ${release} = "centos" ]]; then
@@ -137,38 +137,38 @@ Installation_dependency(){
 	fi
 }
 Install_aria2(){
-	[[ -e ${aria2c} ]] && echo -e "${Error} Aria2 已安装，请检查 !" && exit 1
+	[[ -e ${aria2c} ]] && echo -e "${Error} Aria2 已安裝，請檢查 !" && exit 1
 	check_sys
-	echo -e "${Info} 开始安装/配置 依赖..."
+	echo -e "${Info} 開始安裝/設定 依賴..."
 	Installation_dependency
-	echo -e "${Info} 开始下载/安装 主程序..."
+	echo -e "${Info} 開始下載/安裝 主程式..."
 	check_new_ver
 	Download_aria2
-	echo -e "${Info} 开始下载/安装 配置文件..."
+	echo -e "${Info} 開始下載/安裝 設定檔案..."
 	Download_aria2_conf
-	echo -e "${Info} 开始下载/安装 服务脚本(init)..."
+	echo -e "${Info} 開始下載/安裝 服務腳本(init)..."
 	Service_aria2
 	Read_config
 	aria2_RPC_port=${aria2_port}
-	echo -e "${Info} 开始设置 iptables防火墙..."
+	echo -e "${Info} 開始設定 iptables防火牆..."
 	Set_iptables
-	echo -e "${Info} 开始添加 iptables防火墙规则..."
+	echo -e "${Info} 開始添加 iptables防火牆規則..."
 	Add_iptables
-	echo -e "${Info} 开始保存 iptables防火墙规则..."
+	echo -e "${Info} 開始儲存 iptables防火牆規則..."
 	Save_iptables
-	echo -e "${Info} 所有步骤 安装完毕，开始启动..."
+	echo -e "${Info} 所有步驟 安裝完畢，開始啟動..."
 	Start_aria2
 }
 Start_aria2(){
 	check_installed_status
 	check_pid
-	[[ ! -z ${PID} ]] && echo -e "${Error} Aria2 正在运行，请检查 !" && exit 1
+	[[ ! -z ${PID} ]] && echo -e "${Error} Aria2 正在執行，請檢查 !" && exit 1
 	/etc/init.d/aria2 start
 }
 Stop_aria2(){
 	check_installed_status
 	check_pid
-	[[ -z ${PID} ]] && echo -e "${Error} Aria2 没有运行，请检查 !" && exit 1
+	[[ -z ${PID} ]] && echo -e "${Error} Aria2 沒有執行，請檢查 !" && exit 1
 	/etc/init.d/aria2 stop
 }
 Restart_aria2(){
@@ -179,13 +179,13 @@ Restart_aria2(){
 }
 Set_aria2(){
 	check_installed_status
-	echo && echo -e "你要做什么？
- ${Green_font_prefix}1.${Font_color_suffix}  修改 Aria2 RPC密码
- ${Green_font_prefix}2.${Font_color_suffix}  修改 Aria2 RPC端口
- ${Green_font_prefix}3.${Font_color_suffix}  修改 Aria2 文件下载位置
- ${Green_font_prefix}4.${Font_color_suffix}  修改 Aria2 密码+端口+文件下载位置
- ${Green_font_prefix}5.${Font_color_suffix}  手动 打开配置文件修改" && echo
-	stty erase '^H' && read -p "(默认: 取消):" aria2_modify
+	echo && echo -e "你要做什麼？
+ ${Green_font_prefix}1.${Font_color_suffix}  修改 Aria2 RPC密碼
+ ${Green_font_prefix}2.${Font_color_suffix}  修改 Aria2 RPC埠
+ ${Green_font_prefix}3.${Font_color_suffix}  修改 Aria2 檔案下載位置
+ ${Green_font_prefix}4.${Font_color_suffix}  修改 Aria2 密碼+埠+檔案下載位置
+ ${Green_font_prefix}5.${Font_color_suffix}  手動 打開設定檔案修改" && echo
+	stty erase '^H' && read -p "(預設: 取消):" aria2_modify
 	[[ -z "${aria2_modify}" ]] && echo "已取消..." && exit 1
 	if [[ ${aria2_modify} == "1" ]]; then
 		Set_aria2_RPC_passwd
@@ -198,7 +198,7 @@ Set_aria2(){
 	elif [[ ${aria2_modify} == "5" ]]; then
 		Set_aria2_vim_conf
 	else
-		echo -e "${Error} 请输入正确的数字(1-5)" && exit 1
+		echo -e "${Error} 請輸入正確的數位(1-5)" && exit 1
 	fi
 }
 Set_aria2_RPC_passwd(){
@@ -207,38 +207,38 @@ Set_aria2_RPC_passwd(){
 		Read_config
 	fi
 	if [[ -z "${aria2_passwd}" ]]; then
-		aria2_passwd_1="空(没有检测到配置，可能手动删除或注释了)"
+		aria2_passwd_1="空(沒有檢測到設定，可能手動刪除或注釋了)"
 	else
 		aria2_passwd_1=${aria2_passwd}
 	fi
-	echo -e "请输入要设置的 Aria2 RPC密码(旧密码为：${Green_font_prefix}${aria2_passwd_1}${Font_color_suffix})"
-	stty erase '^H' && read -p "(默认密码: 随机生成 密码请不要包含等号 = 和井号 #):" aria2_RPC_passwd
+	echo -e "請輸入要設置的 Aria2 RPC密碼(舊密碼為：${Green_font_prefix}${aria2_passwd_1}${Font_color_suffix})"
+	stty erase '^H' && read -p "(預設密碼: 隨機生成 密碼請不要包含等號 = 和井號 #):" aria2_RPC_passwd
 	echo
 	[[ -z "${aria2_RPC_passwd}" ]] && aria2_RPC_passwd=$(date +%s%N | md5sum | head -c 20)
 	if [[ "${aria2_passwd}" != "${aria2_RPC_passwd}" ]]; then
 		if [[ -z "${aria2_passwd}" ]]; then
 			echo -e "\nrpc-secret=${aria2_RPC_passwd}" >> ${aria2_conf}
 			if [[ $? -eq 0 ]];then
-				echo -e "${Info} 密码修改成功！新密码为：${Green_font_prefix}${aria2_RPC_passwd}${Font_color_suffix}(因为找不到旧配置参数，所以自动加入配置文件底部)"
+				echo -e "${Info} 密碼修改成功！新密碼為：${Green_font_prefix}${aria2_RPC_passwd}${Font_color_suffix}(因為找不到舊設定參數，所以自動加入設定檔案底部)"
 				if [[ ${read_123} != "1" ]]; then
 					Restart_aria2
 				fi
 			else 
-				echo -e "${Error} 密码修改失败！旧密码为：${Green_font_prefix}${aria2_passwd}${Font_color_suffix}"
+				echo -e "${Error} 密碼修改失敗！舊密碼為：${Green_font_prefix}${aria2_passwd}${Font_color_suffix}"
 			fi
 		else
 			sed -i 's/^rpc-secret='${aria2_passwd}'/rpc-secret='${aria2_RPC_passwd}'/g' ${aria2_conf}
 			if [[ $? -eq 0 ]];then
-				echo -e "${Info} 密码修改成功！新密码为：${Green_font_prefix}${aria2_RPC_passwd}${Font_color_suffix}"
+				echo -e "${Info} 密碼修改成功！新密碼為：${Green_font_prefix}${aria2_RPC_passwd}${Font_color_suffix}"
 				if [[ ${read_123} != "1" ]]; then
 					Restart_aria2
 				fi
 			else 
-				echo -e "${Error} 密码修改失败！旧密码为：${Green_font_prefix}${aria2_passwd}${Font_color_suffix}"
+				echo -e "${Error} 密碼修改失敗！舊密碼為：${Green_font_prefix}${aria2_passwd}${Font_color_suffix}"
 			fi
 		fi
 	else
-		echo -e "${Error} 新密码与旧密码一致，取消..."
+		echo -e "${Error} 新密碼與舊密碼一致，取消..."
 	fi
 }
 Set_aria2_RPC_port(){
@@ -247,19 +247,19 @@ Set_aria2_RPC_port(){
 		Read_config
 	fi
 	if [[ -z "${aria2_port}" ]]; then
-		aria2_port_1="空(没有检测到配置，可能手动删除或注释了)"
+		aria2_port_1="空(沒有檢測到設定，可能手動刪除或注釋了)"
 	else
 		aria2_port_1=${aria2_port}
 	fi
-	echo -e "请输入要设置的 Aria2 RPC端口(旧端口为：${Green_font_prefix}${aria2_port_1}${Font_color_suffix})"
-	stty erase '^H' && read -p "(默认端口: 6800):" aria2_RPC_port
+	echo -e "請輸入要設置的 Aria2 RPC埠(舊埠為：${Green_font_prefix}${aria2_port_1}${Font_color_suffix})"
+	stty erase '^H' && read -p "(預設埠: 6800):" aria2_RPC_port
 	echo
 	[[ -z "${aria2_RPC_port}" ]] && aria2_RPC_port="6800"
 	if [[ "${aria2_port}" != "${aria2_RPC_port}" ]]; then
 		if [[ -z "${aria2_port}" ]]; then
 			echo -e "\nrpc-listen-port=${aria2_RPC_port}" >> ${aria2_conf}
 			if [[ $? -eq 0 ]];then
-				echo -e "${Info} 端口修改成功！新端口为：${Green_font_prefix}${aria2_RPC_port}${Font_color_suffix}(因为找不到旧配置参数，所以自动加入配置文件底部)"
+				echo -e "${Info} 埠修改成功！新埠為：${Green_font_prefix}${aria2_RPC_port}${Font_color_suffix}(因為找不到舊設定參數，所以自動加入設定檔案底部)"
 				Del_iptables
 				Add_iptables
 				Save_iptables
@@ -267,12 +267,12 @@ Set_aria2_RPC_port(){
 					Restart_aria2
 				fi
 			else 
-				echo -e "${Error} 端口修改失败！旧端口为：${Green_font_prefix}${aria2_port}${Font_color_suffix}"
+				echo -e "${Error} 埠修改失敗！舊埠為：${Green_font_prefix}${aria2_port}${Font_color_suffix}"
 			fi
 		else
 			sed -i 's/^rpc-listen-port='${aria2_port}'/rpc-listen-port='${aria2_RPC_port}'/g' ${aria2_conf}
 			if [[ $? -eq 0 ]];then
-				echo -e "${Info} 端口修改成功！新密码为：${Green_font_prefix}${aria2_RPC_port}${Font_color_suffix}"
+				echo -e "${Info} 埠修改成功！新密碼為：${Green_font_prefix}${aria2_RPC_port}${Font_color_suffix}"
 				Del_iptables
 				Add_iptables
 				Save_iptables
@@ -280,11 +280,11 @@ Set_aria2_RPC_port(){
 					Restart_aria2
 				fi
 			else 
-				echo -e "${Error} 端口修改失败！旧密码为：${Green_font_prefix}${aria2_port}${Font_color_suffix}"
+				echo -e "${Error} 埠修改失敗！舊密碼為：${Green_font_prefix}${aria2_port}${Font_color_suffix}"
 			fi
 		fi
 	else
-		echo -e "${Error} 新端口与旧端口一致，取消..."
+		echo -e "${Error} 新埠與舊埠一致，取消..."
 	fi
 }
 Set_aria2_RPC_dir(){
@@ -293,12 +293,12 @@ Set_aria2_RPC_dir(){
 		Read_config
 	fi
 	if [[ -z "${aria2_dir}" ]]; then
-		aria2_dir_1="空(没有检测到配置，可能手动删除或注释了)"
+		aria2_dir_1="空(沒有檢測到設定，可能手動刪除或注釋了)"
 	else
 		aria2_dir_1=${aria2_dir}
 	fi
-	echo -e "请输入要设置的 Aria2 文件下载位置(旧位置为：${Green_font_prefix}${aria2_dir_1}${Font_color_suffix})"
-	stty erase '^H' && read -p "(默认位置: /usr/local/caddy/www/aria2/Download):" aria2_RPC_dir
+	echo -e "請輸入要設置的 Aria2 檔案下載位置(舊位置為：${Green_font_prefix}${aria2_dir_1}${Font_color_suffix})"
+	stty erase '^H' && read -p "(預設位置: /usr/local/caddy/www/aria2/Download):" aria2_RPC_dir
 	[[ -z "${aria2_RPC_dir}" ]] && aria2_RPC_dir="/usr/local/caddy/www/aria2/Download"
 	echo
 	if [[ -d "${aria2_RPC_dir}" ]]; then
@@ -306,31 +306,31 @@ Set_aria2_RPC_dir(){
 			if [[ -z "${aria2_dir}" ]]; then
 				echo -e "\ndir=${aria2_RPC_dir}" >> ${aria2_conf}
 				if [[ $? -eq 0 ]];then
-					echo -e "${Info} 位置修改成功！新位置为：${Green_font_prefix}${aria2_RPC_dir}${Font_color_suffix}(因为找不到旧配置参数，所以自动加入配置文件底部)"
+					echo -e "${Info} 位置修改成功！新位置為：${Green_font_prefix}${aria2_RPC_dir}${Font_color_suffix}(因為找不到舊設定參數，所以自動加入設定檔案底部)"
 					if [[ ${read_123} != "1" ]]; then
 						Restart_aria2
 					fi
 				else 
-					echo -e "${Error} 位置修改失败！旧位置为：${Green_font_prefix}${aria2_dir}${Font_color_suffix}"
+					echo -e "${Error} 位置修改失敗！舊位置為：${Green_font_prefix}${aria2_dir}${Font_color_suffix}"
 				fi
 			else
 				aria2_dir_2=$(echo "${aria2_dir}"|sed 's/\//\\\//g')
 				aria2_RPC_dir_2=$(echo "${aria2_RPC_dir}"|sed 's/\//\\\//g')
 				sed -i 's/^dir='${aria2_dir_2}'/dir='${aria2_RPC_dir_2}'/g' ${aria2_conf}
 				if [[ $? -eq 0 ]];then
-					echo -e "${Info} 位置修改成功！新位置为：${Green_font_prefix}${aria2_RPC_dir}${Font_color_suffix}"
+					echo -e "${Info} 位置修改成功！新位置為：${Green_font_prefix}${aria2_RPC_dir}${Font_color_suffix}"
 					if [[ ${read_123} != "1" ]]; then
 						Restart_aria2
 					fi
 				else 
-					echo -e "${Error} 位置修改失败！旧位置为：${Green_font_prefix}${aria2_dir}${Font_color_suffix}"
+					echo -e "${Error} 位置修改失敗！舊位置為：${Green_font_prefix}${aria2_dir}${Font_color_suffix}"
 				fi
 			fi
 		else
-			echo -e "${Error} 新位置与旧位置一致，取消..."
+			echo -e "${Error} 新位置與舊位置一致，取消..."
 		fi
 	else
-		echo -e "${Error} 新位置文件夹不存在，请检查！新位置为：${Green_font_prefix}${aria2_RPC_dir}${Font_color_suffix}"
+		echo -e "${Error} 新位置資料夾不存在，請檢查！新位置為：${Green_font_prefix}${aria2_RPC_dir}${Font_color_suffix}"
 	fi
 }
 Set_aria2_RPC_passwd_port_dir(){
@@ -343,13 +343,13 @@ Set_aria2_RPC_passwd_port_dir(){
 Set_aria2_vim_conf(){
 	Read_config
 	aria2_port_old=${aria2_port}
-	echo -e "${Tip} 手动修改配置文件须知（VIM 编辑器）：
-${Green_font_prefix}1.${Font_color_suffix} 配置文件中含有中文注释，如果你的服务器或SSH工具不支持中文现在，将会乱码(请本地编辑)。
-${Green_font_prefix}2.${Font_color_suffix} 打开配置文件后，按 ${Green_font_prefix}I键${Font_color_suffix} 进入编辑模式(左下角显示 ${Green_font_prefix}-- INSERT --${Font_color_suffix})，然后就可以编辑文件了，
-   编辑文件完成后，按 ${Green_font_prefix}Esc键${Font_color_suffix} 退出编辑模式，然后输入 ${Green_font_prefix}:wq${Font_color_suffix} (半角 小写)回车，即保存并退出。
-${Green_font_prefix}3.${Font_color_suffix} 如果你不想要保存，那么按 ${Green_font_prefix}Esc键${Font_color_suffix} 退出编辑模式，然后输入 ${Green_font_prefix}:q!${Font_color_suffix} (半角 小写)回车，即不保存退出。
-${Green_font_prefix}4.${Font_color_suffix} 如果你打算在本地编辑配置文件，那么配置文件位置： ${Green_font_prefix}/root/.aria2/aria2.conf${Font_color_suffix} (注意是隐藏目录) 。" && echo
-	stty erase '^H' && read -p "如果理解 VIM 使用方法，请按任意键继续，如要取消请使用 Ctrl+C 。" var
+	echo -e "${Tip} 手動修改設定檔案須知（VIM 編輯器）：
+${Green_font_prefix}1.${Font_color_suffix} 設定檔案中含有中文注釋，如果你的伺服器或SSH工具不支援中文現在，將會亂碼(請本機編輯)。
+${Green_font_prefix}2.${Font_color_suffix} 打開設定檔案後，按 ${Green_font_prefix}I鍵${Font_color_suffix} 進入編輯模式(左下角顯示 ${Green_font_prefix}-- INSERT --${Font_color_suffix})，然後就可以編輯檔案了，
+   編輯檔案完成後，按 ${Green_font_prefix}Esc鍵${Font_color_suffix} 退出編輯模式，然後輸入 ${Green_font_prefix}:wq${Font_color_suffix} (半形 小寫)回車，即儲存並退出。
+${Green_font_prefix}3.${Font_color_suffix} 如果你不想要儲存，那麼按 ${Green_font_prefix}Esc鍵${Font_color_suffix} 退出編輯模式，然後輸入 ${Green_font_prefix}:q!${Font_color_suffix} (半形 小寫)回車，即不儲存退出。
+${Green_font_prefix}4.${Font_color_suffix} 如果你打算在本機編輯設定檔案，那麼設定檔案位置： ${Green_font_prefix}/root/.aria2/aria2.conf${Font_color_suffix} (注意是隱藏目錄) 。" && echo
+	stty erase '^H' && read -p "如果理解 VIM 使用方法，請按任意鍵繼續，如要取消請使用 Ctrl+C 。" var
 	vim ${aria2_conf}
 	Read_config
 	if [[ ${aria2_port_old} != ${aria2_port} ]]; then
@@ -365,7 +365,7 @@ Read_config(){
 	status_type=$1
 	if [[ ! -e ${aria2_conf} ]]; then
 		if [[ ${status_type} != "un" ]]; then
-			echo -e "${Error} Aria2 配置文件不存在 !" && exit 1
+			echo -e "${Error} Aria2 設定檔案不存在 !" && exit 1
 		fi
 	else
 		conf_text=$(cat ${aria2_conf}|grep -v '#')
@@ -384,23 +384,23 @@ View_Aria2(){
 		if [[ -z "${ip}" ]]; then
 			ip=$(wget -qO- -t1 -T2 members.3322.org/dyndns/getip)
 			if [[ -z "${ip}" ]]; then
-				ip="VPS_IP(外网IP检测失败)"
+				ip="VPS_IP(外網IP檢測失敗)"
 			fi
 		fi
 	fi
-	[[ -z "${aria2_dir}" ]] && aria2_dir="找不到配置参数"
-	[[ -z "${aria2_port}" ]] && aria2_port="找不到配置参数"
-	[[ -z "${aria2_passwd}" ]] && aria2_passwd="找不到配置参数(或无密码)"
+	[[ -z "${aria2_dir}" ]] && aria2_dir="找不到設定參數"
+	[[ -z "${aria2_port}" ]] && aria2_port="找不到設定參數"
+	[[ -z "${aria2_passwd}" ]] && aria2_passwd="找不到設定參數(或無密碼)"
 	clear
-	echo -e "\nAria2 简单配置信息：\n
+	echo -e "\nAria2 簡單設定訊息：\n
  地址\t: ${Green_font_prefix}${ip}${Font_color_suffix}
- 端口\t: ${Green_font_prefix}${aria2_port}${Font_color_suffix}
- 密码\t: ${Green_font_prefix}${aria2_passwd}${Font_color_suffix}
- 目录\t: ${Green_font_prefix}${aria2_dir}${Font_color_suffix}\n"
+ 埠\t: ${Green_font_prefix}${aria2_port}${Font_color_suffix}
+ 密碼\t: ${Green_font_prefix}${aria2_passwd}${Font_color_suffix}
+ 目錄\t: ${Green_font_prefix}${aria2_dir}${Font_color_suffix}\n"
 }
 View_Log(){
-	[[ ! -e ${aria2_log} ]] && echo -e "${Error} Aria2 日志文件不存在 !" && exit 1
-	echo && echo -e "${Tip} 按 ${Red_font_prefix}Ctrl+C${Font_color_suffix} 终止查看日志" && echo
+	[[ ! -e ${aria2_log} ]] && echo -e "${Error} Aria2 日誌檔案不存在 !" && exit 1
+	echo && echo -e "${Tip} 按 ${Red_font_prefix}Ctrl+C${Font_color_suffix} 終止查看日誌" && echo
 	tail -f ${aria2_log}
 }
 Update_bt_tracker(){
@@ -408,9 +408,9 @@ Update_bt_tracker(){
 	check_crontab_installed_status
 	crontab_update_status=$(crontab -l|grep "aria2.sh update-bt-tracker")
 	if [[ -z "${crontab_update_status}" ]]; then
-		echo && echo -e "当前自动更新模式: ${Green_font_prefix}未开启${Font_color_suffix}" && echo
-		echo -e "确定要开启 ${Green_font_prefix}Aria2 自动更新 BT-Tracker服务器${Font_color_suffix} 功能吗？(一般情况下会加强BT下载效果)[Y/n]"
-		stty erase '^H' && read -p "(默认: y):" crontab_update_status_ny
+		echo && echo -e "目前自動更新模式: ${Green_font_prefix}未開啟${Font_color_suffix}" && echo
+		echo -e "確定要開啟 ${Green_font_prefix}Aria2 自動更新 BT-Tracker伺服器${Font_color_suffix} 功能嗎？(一般情況下會加強BT下載效果)[Y/n]"
+		stty erase '^H' && read -p "(預設: y):" crontab_update_status_ny
 		[[ -z "${crontab_update_status_ny}" ]] && crontab_update_status_ny="y"
 		if [[ ${crontab_update_status_ny} == [Yy] ]]; then
 			crontab_update_start
@@ -418,9 +418,9 @@ Update_bt_tracker(){
 			echo && echo "	已取消..." && echo
 		fi
 	else
-		echo && echo -e "当前自动更新模式: ${Green_font_prefix}已开启${Font_color_suffix}" && echo
-		echo -e "确定要关闭 ${Green_font_prefix}Aria2 自动更新 BT-Tracker服务器${Font_color_suffix} 功能吗？(一般情况下会加强BT下载效果)[y/N]"
-		stty erase '^H' && read -p "(默认: n):" crontab_update_status_ny
+		echo && echo -e "目前自動更新模式: ${Green_font_prefix}已開啟${Font_color_suffix}" && echo
+		echo -e "確定要關閉 ${Green_font_prefix}Aria2 自動更新 BT-Tracker伺服器${Font_color_suffix} 功能嗎？(一般情況下會加強BT下載效果)[y/N]"
+		stty erase '^H' && read -p "(預設: n):" crontab_update_status_ny
 		[[ -z "${crontab_update_status_ny}" ]] && crontab_update_status_ny="n"
 		if [[ ${crontab_update_status_ny} == [Yy] ]]; then
 			crontab_update_stop
@@ -437,9 +437,9 @@ crontab_update_start(){
 	rm -f "$file_1/crontab.bak"
 	cron_config=$(crontab -l | grep "aria2.sh update-bt-tracker")
 	if [[ -z ${cron_config} ]]; then
-		echo -e "${Error} Aria2 自动更新 BT-Tracker服务器 开启失败 !" && exit 1
+		echo -e "${Error} Aria2 自動更新 BT-Tracker伺服器 開啟失敗 !" && exit 1
 	else
-		echo -e "${Info} Aria2 自动更新 BT-Tracker服务器 开启成功 !"
+		echo -e "${Info} Aria2 自動更新 BT-Tracker伺服器 開啟成功 !"
 		Update_bt_tracker_cron
 	fi
 }
@@ -450,9 +450,9 @@ crontab_update_stop(){
 	rm -f "$file_1/crontab.bak"
 	cron_config=$(crontab -l | grep "aria2.sh update-bt-tracker")
 	if [[ ! -z ${cron_config} ]]; then
-		echo -e "${Error} Aria2 自动更新 BT-Tracker服务器 停止失败 !" && exit 1
+		echo -e "${Error} Aria2 自動更新 BT-Tracker伺服器 停止失敗 !" && exit 1
 	else
-		echo -e "${Info} Aria2 自动更新 BT-Tracker服务器 停止成功 !"
+		echo -e "${Info} Aria2 自動更新 BT-Tracker伺服器 停止成功 !"
 	fi
 }
 Update_bt_tracker_cron(){
@@ -471,9 +471,9 @@ Update_bt_tracker_cron(){
 }
 Uninstall_aria2(){
 	check_installed_status "un"
-	echo "确定要卸载 Aria2 ? (y/N)"
+	echo "確定要移除 Aria2 ? (y/N)"
 	echo
-	stty erase '^H' && read -p "(默认: n):" unyn
+	stty erase '^H' && read -p "(預設: n):" unyn
 	[[ -z ${unyn} ]] && unyn="n"
 	if [[ ${unyn} == [Yy] ]]; then
 		crontab -l > "$file_1/crontab.bak"
@@ -497,9 +497,9 @@ Uninstall_aria2(){
 			update-rc.d -f aria2 remove
 		fi
 		rm -rf "/etc/init.d/aria2"
-		echo && echo "Aria2 卸载完成 !" && echo
+		echo && echo "Aria2 移除完成 !" && echo
 	else
-		echo && echo "卸载已取消..." && echo
+		echo && echo "移除已取消..." && echo
 	fi
 }
 Add_iptables(){
@@ -528,56 +528,56 @@ Set_iptables(){
 	fi
 }
 Update_Shell(){
-	echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
+	echo -e "目前版本為 [ ${sh_ver} ]，開始檢測最新版本..."
 	sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/aria2.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
-	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 检测最新版本失败 !" && exit 0
+	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 檢測最新版本失敗 !" && exit 0
 	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
-		echo -e "发现新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
-		stty erase '^H' && read -p "(默认: y):" yn
+		echo -e "發現新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
+		stty erase '^H' && read -p "(預設: y):" yn
 		[[ -z "${yn}" ]] && yn="y"
 		if [[ ${yn} == [Yy] ]]; then
 			wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/aria2.sh && chmod +x aria2.sh
-			echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !"
+			echo -e "腳本已更新為最新版本[ ${sh_new_ver} ] !"
 		else
 			echo && echo "	已取消..." && echo
 		fi
 	else
-		echo -e "当前已是最新版本[ ${sh_new_ver} ] !"
+		echo -e "目前已是最新版本[ ${sh_new_ver} ] !"
 	fi
 }
 action=$1
 if [[ "${action}" == "update-bt-tracker" ]]; then
 	Update_bt_tracker_cron
 else
-echo && echo -e " Aria2 一键安装管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
+echo && echo -e " Aria2 一鍵安裝管理腳本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
   -- Toyo | doub.io/shell-jc4 --
   
- ${Green_font_prefix}0.${Font_color_suffix} 升级脚本
+ ${Green_font_prefix}0.${Font_color_suffix} 升級腳本
 ————————————
- ${Green_font_prefix}1.${Font_color_suffix} 安装 Aria2
- ${Green_font_prefix}2.${Font_color_suffix} 卸载 Aria2
+ ${Green_font_prefix}1.${Font_color_suffix} 安裝 Aria2
+ ${Green_font_prefix}2.${Font_color_suffix} 移除 Aria2
 ————————————
- ${Green_font_prefix}3.${Font_color_suffix} 启动 Aria2
+ ${Green_font_prefix}3.${Font_color_suffix} 啟動 Aria2
  ${Green_font_prefix}4.${Font_color_suffix} 停止 Aria2
- ${Green_font_prefix}5.${Font_color_suffix} 重启 Aria2
+ ${Green_font_prefix}5.${Font_color_suffix} 重啟 Aria2
 ————————————
- ${Green_font_prefix}6.${Font_color_suffix} 修改 配置文件
- ${Green_font_prefix}7.${Font_color_suffix} 查看 配置信息
- ${Green_font_prefix}8.${Font_color_suffix} 查看 日志信息
- ${Green_font_prefix}9.${Font_color_suffix} 配置 自动更新 BT-Tracker服务器
+ ${Green_font_prefix}6.${Font_color_suffix} 修改 設定檔案
+ ${Green_font_prefix}7.${Font_color_suffix} 查看 設定訊息
+ ${Green_font_prefix}8.${Font_color_suffix} 查看 日誌訊息
+ ${Green_font_prefix}9.${Font_color_suffix} 設定 自動更新 BT-Tracker伺服器
 ————————————" && echo
 if [[ -e ${aria2c} ]]; then
 	check_pid
 	if [[ ! -z "${PID}" ]]; then
-		echo -e " 当前状态: ${Green_font_prefix}已安装${Font_color_suffix} 并 ${Green_font_prefix}已启动${Font_color_suffix}"
+		echo -e " 目前狀態: ${Green_font_prefix}已安裝${Font_color_suffix} 並 ${Green_font_prefix}已啟動${Font_color_suffix}"
 	else
-		echo -e " 当前状态: ${Green_font_prefix}已安装${Font_color_suffix} 但 ${Red_font_prefix}未启动${Font_color_suffix}"
+		echo -e " 目前狀態: ${Green_font_prefix}已安裝${Font_color_suffix} 但 ${Red_font_prefix}未啟動${Font_color_suffix}"
 	fi
 else
-	echo -e " 当前状态: ${Red_font_prefix}未安装${Font_color_suffix}"
+	echo -e " 目前狀態: ${Red_font_prefix}未安裝${Font_color_suffix}"
 fi
 echo
-stty erase '^H' && read -p " 请输入数字 [0-9]:" num
+stty erase '^H' && read -p " 請輸入數字 [0-9]:" num
 case "$num" in
 	0)
 	Update_Shell
@@ -610,7 +610,7 @@ case "$num" in
 	Update_bt_tracker
 	;;
 	*)
-	echo "请输入正确数字 [0-9]"
+	echo "請輸入正確數字 [0-9]"
 	;;
 esac
 fi
