@@ -27,7 +27,7 @@ check_running(){
 	fi
 }
 Read_config(){
-	[[ ! -e ${CONF} ]] && echo -e "${Error} DowsDNS 配置文件不存在 !" && exit 1
+	[[ ! -e ${CONF} ]] && echo -e "${Error} DowsDNS 設定檔案不存在 !" && exit 1
 	local_dns_port=`cat ${CONF}|grep "Local_dns_port"|sed -r 's/.*:(.+),.*/\1/'`
 }
 View_dowsdns(){
@@ -39,16 +39,16 @@ View_dowsdns(){
 		[[ -z ${ip} ]] && ip="VPS_IP"
 	fi
 	clear && echo "————————————————" && echo
-	echo -e " 请在你的设备中设置DNS服务器为：
- IP : ${Info_font_prefix}${ip}${Font_suffix} ,端口 : ${Info_font_prefix}${local_dns_port}${Font_suffix}
+	echo -e " 請在你的設備中設定DNS伺服器為：
+ IP : ${Info_font_prefix}${ip}${Font_suffix} ,埠 : ${Info_font_prefix}${local_dns_port}${Font_suffix}
  
- 注意：如果设备中没有 DNS端口设置选项，那么就只能使用默认的 53 端口"
+ 注意：如果設備中沒有 DNS埠設定選項，那麼就只能使用預設的 53 埠"
 	echo && echo "————————————————"
 }
 do_start(){
 	check_running
 	if [[ $? -eq 0 ]]; then
-		echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME (PID $(echo ${PID})) 正在运行..." && exit 0
+		echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME (PID $(echo ${PID})) 正在執行..." && exit 0
 	else
 		cd "${BIN}"
 		nohup python start.py > /tmp/dowsdns.log 2>&1 &
@@ -56,9 +56,9 @@ do_start(){
 		check_running
 		if [[ $? -eq 0 ]]; then
 			View_dowsdns
-			echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME 启动成功 !"
+			echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME 啟動成功 !"
 		else
-			echo -e "${Error_font_prefix}[错误]${Font_suffix} $NAME 启动失败 !"
+			echo -e "${Error_font_prefix}[錯誤]${Font_suffix} $NAME 啟動失敗 !"
 		fi
 	fi
 }
@@ -68,12 +68,12 @@ do_stop(){
 		kill -9 ${PID}
 		RETVAL=$?
 		if [[ $RETVAL -eq 0 ]]; then
-			echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME 停止成功 !"
+			echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME 停止成功 !"
 		else
-			echo -e "${Error_font_prefix}[错误]${Font_suffix}$NAME 停止失败 !"
+			echo -e "${Error_font_prefix}[錯誤]${Font_suffix}$NAME 停止失敗 !"
 		fi
 	else
-		echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME 未运行 !"
+		echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME 未執行 !"
 		RETVAL=1
 	fi
 }
@@ -81,9 +81,9 @@ do_status(){
 	check_running
 	if [[ $? -eq 0 ]]; then
 		View_dowsdns
-		echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME (PID $(echo ${PID})) 正在运行..."
+		echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME (PID $(echo ${PID})) 正在執行..."
 	else
-		echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME 未运行 !"
+		echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME 未執行 !"
 		RETVAL=1
 	fi
 }

@@ -18,8 +18,8 @@ PID_FILE="/var/run/ocserv.pid"
 LOG="/tmp/ocserv.log"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-Info="${Green_font_prefix}[信息]${Font_color_suffix}"
-Error="${Red_font_prefix}[错误]${Font_color_suffix}"
+Info="${Green_font_prefix}[訊息]${Font_color_suffix}"
+Error="${Red_font_prefix}[錯誤]${Font_color_suffix}"
 RETVAL=0
 
 check_running(){
@@ -34,16 +34,16 @@ check_running(){
 do_start(){
 	check_running
 	if [[ $? -eq 0 ]]; then
-		echo -e "${Info} $NAME (PID ${PID}) 正在运行..." && exit 0
+		echo -e "${Info} $NAME (PID ${PID}) 正在執行..." && exit 0
 	else
-		echo -e "${Info} $NAME 启动中..."
+		echo -e "${Info} $NAME 啟動中..."
 		nohup ocserv -f -d 1 -c "${CONFIG}" > "${LOG}" 2>&1 &
 		sleep 2s
 		check_running
 		if [[ $? -eq 0 ]]; then
-			echo -e "${Info} $NAME 启动成功 !"
+			echo -e "${Info} $NAME 啟動成功 !"
 		else
-			echo -e "${Error} $NAME 启动失败 !"
+			echo -e "${Error} $NAME 啟動失敗 !"
 		fi
 	fi
 }
@@ -56,19 +56,19 @@ do_stop(){
 			rm -f ${PID_FILE}
 			echo -e "${Info} $NAME 停止成功 !"
 		else
-			echo -e "${Error} $NAME 停止失败 !"
+			echo -e "${Error} $NAME 停止失敗 !"
 		fi
 	else
-		echo -e "${Info} $NAME 未运行"
+		echo -e "${Info} $NAME 未執行"
 		RETVAL=1
 	fi
 }
 do_status(){
 	check_running
 	if [[ $? -eq 0 ]]; then
-		echo -e "${Info} $NAME (PID $(echo ${PID})) 正在运行..."
+		echo -e "${Info} $NAME (PID $(echo ${PID})) 正在執行..."
 	else
-		echo -e "${Info} $NAME 未运行 !"
+		echo -e "${Info} $NAME 未執行 !"
 		RETVAL=1
 	fi
 }
@@ -77,16 +77,16 @@ do_restart(){
 	do_start
 }
 do_log(){
-	[[ ! -e ${LOG} ]] && echo -e "${Error} 日志文件不存在 !" && exit 0
-	echo && echo -e " 按 ${Red_font_prefix}Ctrl+C${Font_color_suffix} 终止查看日志" && echo
+	[[ ! -e ${LOG} ]] && echo -e "${Error} 日誌檔案不存在 !" && exit 0
+	echo && echo -e " 按 ${Red_font_prefix}Ctrl+C${Font_color_suffix} 終止查看日誌" && echo
 	tail -f ${LOG}
 }
 do_test(){
 	check_running
 	if [[ $? -eq 0 ]]; then
-		echo -e "${Info} $NAME (PID ${PID}) 正在运行..." && exit 0
+		echo -e "${Info} $NAME (PID ${PID}) 正在執行..." && exit 0
 	fi
-	echo && echo -e " 提示 note 的不影响使用，提示 Error 的才影响。" && echo
+	echo && echo -e " 提示 note 的不影響使用，提示 Error 的才影響。" && echo
 	ocserv -f -t -c ${CONFIG}
 }
 case "$1" in

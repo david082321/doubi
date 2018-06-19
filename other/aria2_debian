@@ -18,8 +18,8 @@ CONFIG="/root/.aria2/aria2.conf"
 LOG="/root/.aria2/aria2.log"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-Info="${Green_font_prefix}[信息]${Font_color_suffix}"
-Error="${Red_font_prefix}[错误]${Font_color_suffix}"
+Info="${Green_font_prefix}[訊息]${Font_color_suffix}"
+Error="${Red_font_prefix}[錯誤]${Font_color_suffix}"
 RETVAL=0
 
 check_running(){
@@ -31,7 +31,7 @@ check_running(){
 	fi
 }
 Read_config(){
-	[[ ! -e ${CONFIG} ]] && echo -e "${Error} ${NAME} 配置文件不存在 !" && exit 1
+	[[ ! -e ${CONFIG} ]] && echo -e "${Error} ${NAME} 設定檔案不存在 !" && exit 1
 	Download_dir=$(cat ${CONFIG}|grep -v '#'|grep "dir=")
 	[[ ! -z "${Download_dir}" ]] && Download_dir=$(echo "${Download_dir}"|awk -F '=' '{print $2}')
 	RPC_listen_port=$(cat ${CONFIG}|grep -v '#'|grep "rpc-listen-port=")
@@ -47,33 +47,33 @@ View_Config(){
 		if [[ -z "${ip}" ]]; then
 			ip=$(wget -qO- -t1 -T2 members.3322.org/dyndns/getip)
 			if [[ -z "${ip}" ]]; then
-				ip="VPS_IP(外网IP检测失败)"
+				ip="VPS_IP(外網IP檢測失敗)"
 			fi
 		fi
 	fi
 	[[ -z "${Download_dir}" ]] && Download_dir="/usr/local/aria2/"
 	[[ -z "${RPC_listen_port}" ]] && RPC_listen_port="6800"
-	[[ -z "${RPC_secret}" ]] && RPC_secret="无令牌密码"
+	[[ -z "${RPC_secret}" ]] && RPC_secret="無令牌密碼"
 	clear
-	echo -e "\nAria2 简单配置信息：\n
+	echo -e "\nAria2 簡單設定訊息：\n
  地址\t: ${Green_font_prefix}${ip}${Font_color_suffix}
- 端口\t: ${Green_font_prefix}${RPC_listen_port}${Font_color_suffix}
- 密码\t: ${Green_font_prefix}${RPC_secret}${Font_color_suffix}
- 目录\t: ${Green_font_prefix}${Download_dir}${Font_color_suffix}\n"
+ 埠\t: ${Green_font_prefix}${RPC_listen_port}${Font_color_suffix}
+ 密碼\t: ${Green_font_prefix}${RPC_secret}${Font_color_suffix}
+ 目錄\t: ${Green_font_prefix}${Download_dir}${Font_color_suffix}\n"
 }
 do_start(){
 	check_running
 	if [[ $? -eq 0 ]]; then
-		echo -e "${Info} $NAME (PID ${PID}) 正在运行..." && exit 0
+		echo -e "${Info} $NAME (PID ${PID}) 正在執行..." && exit 0
 	else
 		nohup aria2c -c "${CONFIG}" > "${LOG}" 2>&1 &
 		sleep 2s
 		check_running
 		if [[ $? -eq 0 ]]; then
 			View_Config
-			echo -e "${Info} $NAME 启动成功 !"
+			echo -e "${Info} $NAME 啟動成功 !"
 		else
-			echo -e "${Error} $NAME 启动失败 !"
+			echo -e "${Error} $NAME 啟動失敗 !"
 		fi
 	fi
 }
@@ -85,10 +85,10 @@ do_stop(){
 		if [[ $RETVAL -eq 0 ]]; then
 			echo -e "${Info} $NAME 停止成功 !"
 		else
-			echo -e "${Error} $NAME 停止失败 !"
+			echo -e "${Error} $NAME 停止失敗 !"
 		fi
 	else
-		echo -e "${Info} $NAME 未运行"
+		echo -e "${Info} $NAME 未執行"
 		RETVAL=1
 	fi
 }
@@ -96,9 +96,9 @@ do_status(){
 	check_running
 	if [[ $? -eq 0 ]]; then
 		View_Config
-		echo -e "${Info} $NAME (PID $(echo ${PID})) 正在运行..."
+		echo -e "${Info} $NAME (PID $(echo ${PID})) 正在執行..."
 	else
-		echo -e "${Info} $NAME 未运行 !"
+		echo -e "${Info} $NAME 未執行 !"
 		RETVAL=1
 	fi
 }

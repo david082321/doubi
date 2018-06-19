@@ -33,7 +33,7 @@ check_running(){
 do_start(){
 	check_running
 	if [[ $? -eq 0 ]]; then
-	echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME (PID ${PID}) 正在运行..." && exit 0
+	echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME (PID ${PID}) 正在執行..." && exit 0
 	else
 		cd ${FOLDER}
 		#python_ver=$(ls /usr/bin|grep -e "^python[23]\.[1-9]\+$"|tail -1)
@@ -43,9 +43,9 @@ do_start(){
 		sleep 2s
 		check_running
 		if [[ $? -eq 0 ]]; then
-			echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME 启动成功 !"
+			echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME 啟動成功 !"
 		else
-			echo -e "${Error_font_prefix}[错误]${Font_suffix} $NAME 启动失败 !"
+			echo -e "${Error_font_prefix}[錯誤]${Font_suffix} $NAME 啟動失敗 !"
 		fi
 	fi
 }
@@ -55,21 +55,21 @@ do_stop(){
 		kill -9 ${PID}
 		RETVAL=$?
 		if [[ $RETVAL -eq 0 ]]; then
-			echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME 停止成功 !"
+			echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME 停止成功 !"
 		else
-			echo -e "${Error_font_prefix}[错误]${Font_suffix}$NAME 停止失败 !"
+			echo -e "${Error_font_prefix}[錯誤]${Font_suffix}$NAME 停止失敗 !"
 		fi
 	else
-		echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME 未运行 !"
+		echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME 未執行 !"
 		RETVAL=1
 	fi
 }
 do_status(){
 	check_running
 	if [[ $? -eq 0 ]]; then
-		echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME (PID ${PID}) 正在运行..."
+		echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME (PID ${PID}) 正在執行..."
 	else
-		echo -e "${Info_font_prefix}[信息]${Font_suffix} $NAME 未运行 !"
+		echo -e "${Info_font_prefix}[訊息]${Font_suffix} $NAME 未執行 !"
 		RETVAL=1
 	fi
 }

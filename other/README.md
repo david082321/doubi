@@ -1,13 +1,13 @@
-# 一些脚本的依赖都放到这里
+# 一些腳本的依賴都放到這裡
 
 jq-1.5.tar.gz
 ======
 
-- 说明：JQ是一个Linux平台上的 JSON 格式解析器。
-- 依赖于此软件的脚本为：ssr.sh
+- 說明：JQ是一個Linux平台上的 JSON 格式解析器。
+- 依賴於此軟體的腳本為：ssr.sh
 
-### 下载安装:
-Debian/Ubuntu系统：
+### 下載安裝:
+Debian/Ubuntu系統：
 ``` bash
 apt-get install -y build-essential
 wget --no-check-certificate -N "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/jq-1.5.tar.gz"

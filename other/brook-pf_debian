@@ -17,8 +17,8 @@ CONF="${FILE}/brook.conf"
 LOG="${FILE}/brook.log"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-Info="${Green_font_prefix}[信息]${Font_color_suffix}"
-Error="${Red_font_prefix}[错误]${Font_color_suffix}"
+Info="${Green_font_prefix}[訊息]${Font_color_suffix}"
+Error="${Red_font_prefix}[錯誤]${Font_color_suffix}"
 RETVAL=0
 
 check_running(){
@@ -30,10 +30,10 @@ check_running(){
 	fi
 }
 read_config(){
-	[[ ! -e ${CONF} ]] && echo -e "${Error} Brook 配置文件不存在 !" && exit 1
+	[[ ! -e ${CONF} ]] && echo -e "${Error} Brook 設定檔案不存在 !" && exit 1
 	user_all=$(cat ${CONF}|sed '/^\s*$/d')
 	user_all_num=$(echo "${user_all}"|wc -l)
-	[[ -z ${user_all} ]] && echo -e "${Error} Brook 配置文件中用户配置为空 !" && exit 1
+	[[ -z ${user_all} ]] && echo -e "${Error} Brook 設定檔案中使用者設定為空 !" && exit 1
 }
 View_User(){
 	for((integer = 1; integer <= ${user_all_num}; integer++))
@@ -45,9 +45,9 @@ View_User(){
 		if [[ ${user_Enabled_pf} == "0" ]]; then
 				user_Enabled_pf_1="${Red_font_prefix}禁用${Font_color_suffix}"
 			else
-				user_Enabled_pf_1="${Green_font_prefix}启用${Font_color_suffix}"
+				user_Enabled_pf_1="${Green_font_prefix}啟用${Font_color_suffix}"
 		fi
-		user_list_all=${user_list_all}"本地监听端口: ${Green_font_prefix}"${user_port}"${Font_color_suffix}\t 被转发IP: ${Green_font_prefix}"${user_ip_pf}"${Font_color_suffix}\t 被转发端口: ${Green_font_prefix}"${user_port_pf}"${Font_color_suffix}\t 状态: ${user_Enabled_pf_1}\n"
+		user_list_all=${user_list_all}"本機監聽埠: ${Green_font_prefix}"${user_port}"${Font_color_suffix}\t 被轉發IP: ${Green_font_prefix}"${user_ip_pf}"${Font_color_suffix}\t 被轉發埠: ${Green_font_prefix}"${user_port_pf}"${Font_color_suffix}\t 狀態: ${user_Enabled_pf_1}\n"
 		user_IP=""
 	done
 	ip=$(wget -qO- -t1 -T2 ipinfo.io/ip)
@@ -60,18 +60,18 @@ View_User(){
 			fi
 		fi
 	fi
-	echo -e "当前端口转发总数: ${Green_background_prefix} "${user_all_num}" ${Font_color_suffix} 当前服务器IP: ${Green_background_prefix} "${ip}" ${Font_color_suffix}"
+	echo -e "目前埠轉發總數: ${Green_background_prefix} "${user_all_num}" ${Font_color_suffix} 目前伺服器IP: ${Green_background_prefix} "${ip}" ${Font_color_suffix}"
 	echo -e "${user_list_all}"
 	echo -e "========================\n"
 }
 do_start(){
 	check_running
 	if [[ $? -eq 0 ]]; then
-		echo -e "${Info} ${NAME} (PID ${PID}) 正在运行..." && exit 0
+		echo -e "${Info} ${NAME} (PID ${PID}) 正在執行..." && exit 0
 	else
 		read_config
 		cd ${FILE}
-		echo -e "${Info} ${NAME} 启动中..."
+		echo -e "${Info} ${NAME} 啟動中..."
 		servers_all=""
 		for((integer = 1; integer <= ${user_all_num}; integer++))
 		do
@@ -88,10 +88,10 @@ do_start(){
 		sleep 2s
 		check_running
 		if [[ $? -eq 0 ]]; then
-			echo -e "${Info} ${NAME} 启动成功 !"
+			echo -e "${Info} ${NAME} 啟動成功 !"
 			View_User
 		else
-			echo -e "${Error} ${NAME} 启动失败 !"
+			echo -e "${Error} ${NAME} 啟動失敗 !"
 		fi
 	fi
 }
@@ -103,10 +103,10 @@ do_stop(){
 		if [[ $RETVAL -eq 0 ]]; then
 			echo -e "${Info} ${NAME} 停止成功 !"
 		else
-			echo -e "${Error} ${NAME} 停止失败 !"
+			echo -e "${Error} ${NAME} 停止失敗 !"
 		fi
 	else
-		echo -e "${Info} ${NAME} 未运行"
+		echo -e "${Info} ${NAME} 未執行"
 		RETVAL=1
 	fi
 }
@@ -115,9 +115,9 @@ do_status(){
 	if [[ $? -eq 0 ]]; then
 		read_config
 		View_User
-		echo -e "${Info} ${NAME} (PID ${PID}) 正在运行..."
+		echo -e "${Info} ${NAME} (PID ${PID}) 正在執行..."
 	else
-		echo -e "${Info} ${NAME} 未运行 !"
+		echo -e "${Info} ${NAME} 未執行 !"
 		RETVAL=1
 	fi
 }
