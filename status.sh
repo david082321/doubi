@@ -59,7 +59,7 @@ check_pid_client(){
 }
 Download_Server_Status_server(){
 	cd "/usr/local"
-	wget -N --no-check-certificate "https://github.com/ToyoDAdoubi/ServerStatus-Toyo/archive/master.zip"
+	wget -N --no-check-certificate "https://github.com/david082321/ServerStatus-Toyo/archive/master.zip"
 	[[ ! -e "master.zip" ]] && echo -e "${Error} ServerStatus 服務端下載失敗 !" && exit 1
 	unzip master.zip && rm -rf master.zip
 	[[ ! -e "ServerStatus-Toyo-master" ]] && echo -e "${Error} ServerStatus 服務端解壓失敗 !" && exit 1
