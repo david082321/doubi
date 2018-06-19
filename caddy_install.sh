@@ -32,7 +32,7 @@ check_sys(){
 	bit=`uname -m`
 }
 check_installed_status(){
-	[[ ! -e ${caddy_file} ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} Caddy 没有安装，请检查 !" && exit 1
+	[[ ! -e ${caddy_file} ]] && echo -e "${Error_font_prefix}[錯誤]${Font_suffix} Caddy 沒有安裝，請檢查 !" && exit 1
 }
 Download_caddy(){
 	[[ ! -e ${file} ]] && mkdir "${file}"
@@ -54,12 +54,12 @@ Download_caddy(){
 	elif [[ ${bit} == "x86_64" ]]; then
 		wget --no-check-certificate -O "caddy_linux.tar.gz" "https://caddyserver.com/download/linux/amd64${extension_all}" && caddy_bit="caddy_linux_amd64"
 	else
-		echo -e "${Error_font_prefix}[错误]${Font_suffix} 不支持 ${bit} !" && exit 1
+		echo -e "${Error_font_prefix}[錯誤]${Font_suffix} 不支援 ${bit} !" && exit 1
 	fi
-	[[ ! -e "caddy_linux.tar.gz" ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} Caddy 下载失败 !" && exit 1
+	[[ ! -e "caddy_linux.tar.gz" ]] && echo -e "${Error_font_prefix}[錯誤]${Font_suffix} Caddy 下載失敗 !" && exit 1
 	tar zxf "caddy_linux.tar.gz"
 	rm -rf "caddy_linux.tar.gz"
-	[[ ! -e ${caddy_file} ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} Caddy 解压失败或压缩文件错误 !" && exit 1
+	[[ ! -e ${caddy_file} ]] && echo -e "${Error_font_prefix}[錯誤]${Font_suffix} Caddy 解壓失敗或壓縮檔案錯誤 !" && exit 1
 	rm -rf LICENSES.txt
 	rm -rf README.txt 
 	rm -rf CHANGES.txt
@@ -69,14 +69,14 @@ Download_caddy(){
 Service_caddy(){
 	if [[ ${release} = "centos" ]]; then
 		if ! wget --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/caddy_centos -O /etc/init.d/caddy; then
-			echo -e "${Error_font_prefix}[错误]${Font_suffix} Caddy服务 管理脚本下载失败 !" && exit 1
+			echo -e "${Error_font_prefix}[錯誤]${Font_suffix} Caddy服務 管理腳本下載失敗 !" && exit 1
 		fi
 		chmod +x /etc/init.d/caddy
 		chkconfig --add caddy
 		chkconfig caddy on
 	else
 		if ! wget --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/caddy_debian -O /etc/init.d/caddy; then
-			echo -e "${Error_font_prefix}[错误]${Font_suffix} Caddy服务 管理脚本下载失败 !" && exit 1
+			echo -e "${Error_font_prefix}[錯誤]${Font_suffix} Caddy服務 管理腳本下載失敗 !" && exit 1
 		fi
 		chmod +x /etc/init.d/caddy
 		update-rc.d -f caddy defaults
@@ -84,8 +84,8 @@ Service_caddy(){
 }
 install_caddy(){
 	if [[ -e ${caddy_file} ]]; then
-		echo && echo -e "${Error_font_prefix}[信息]${Font_suffix} 检测到 Caddy 已安装，是否继续安装(覆盖更新)？[y/N]"
-		stty erase '^H' && read -p "(默认: n):" yn
+		echo && echo -e "${Error_font_prefix}[訊息]${Font_suffix} 檢測到 Caddy 已安裝，是否繼續安裝(覆蓋更新)？[y/N]"
+		stty erase '^H' && read -p "(預設: n):" yn
 		[[ -z ${yn} ]] && yn="n"
 		if [[ ${yn} == [Nn] ]]; then
 			echo && echo "已取消..." && exit 1
@@ -93,16 +93,16 @@ install_caddy(){
 	fi
 	Download_caddy
 	Service_caddy
-	echo && echo -e " Caddy 配置文件：${caddy_conf_file}
- Caddy 日志文件：/tmp/caddy.log
- 使用说明：service caddy start | stop | restart | status
+	echo && echo -e " Caddy 設定檔案：${caddy_conf_file}
+ Caddy 日誌檔案：/tmp/caddy.log
+ 使用說明：service caddy start | stop | restart | status
  或者使用：/etc/init.d/caddy start | stop | restart | status
- ${Info_font_prefix}[信息]${Font_suffix} Caddy 安装完成！" && echo
+ ${Info_font_prefix}[訊息]${Font_suffix} Caddy 安裝完成！" && echo
 }
 uninstall_caddy(){
 	check_installed_status
-	echo && echo "确定要卸载 Caddy ? [y/N]"
-	stty erase '^H' && read -p "(默认: n):" unyn
+	echo && echo "確定要移除 Caddy ? [y/N]"
+	stty erase '^H' && read -p "(預設: n):" unyn
 	[[ -z ${unyn} ]] && unyn="n"
 	if [[ ${unyn} == [Yy] ]]; then
 		PID=`ps -ef |grep "caddy" |grep -v "grep" |grep -v "init.d" |grep -v "service" |grep -v "caddy_install" |awk '{print $2}'`
@@ -116,10 +116,10 @@ uninstall_caddy(){
 		rm -rf ${caddy_file}
 		rm -rf ${caddy_conf_file}
 		rm -rf /etc/init.d/caddy
-		[[ ! -e ${caddy_file} ]] && echo && echo -e "${Info_font_prefix}[信息]${Font_suffix} Caddy 卸载完成 !" && echo && exit 1
-		echo && echo -e "${Error_font_prefix}[错误]${Font_suffix} Caddy 卸载失败 !" && echo
+		[[ ! -e ${caddy_file} ]] && echo && echo -e "${Info_font_prefix}[訊息]${Font_suffix} Caddy 移除完成 !" && echo && exit 1
+		echo && echo -e "${Error_font_prefix}[錯誤]${Font_suffix} Caddy 移除失敗 !" && echo
 	else
-		echo && echo "卸载已取消..." && echo
+		echo && echo "移除已取消..." && echo
 	fi
 }
 check_sys
@@ -131,7 +131,7 @@ case "$action" in
     ${action}_caddy
     ;;
     *)
-    echo "输入错误 !"
+    echo "輸入錯誤 !"
     echo "用法: {install | uninstall}"
     ;;
 esac
