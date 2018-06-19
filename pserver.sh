@@ -14,7 +14,7 @@ node_ver="v6.9.1"
 node_file="/etc/node"
 ps_file="/etc/node/lib/node_modules/peerflix-server"
 
-#检查系统
+#檢查系統
 check_sys(){
 	if [[ -f /etc/redhat-release ]]; then
 		release="centos"
@@ -48,17 +48,17 @@ deliptables(){
 	iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport 6881 -j ACCEPT
 	iptables -D INPUT -m state --state NEW -m udp -p udp --dport 6881 -j ACCEPT
 }
-# 安装PS
+# 安裝PS
 installps(){
-# 判断是否安装PS
+# 判斷是否安裝PS
 	if [ -e ${ps_file} ];
 	then
-		echo -e "\033[41;37m [错误] \033[0m 检测到 Peerflix Server 已安装，如需继续，请先卸载 !"
+		echo -e "\033[41;37m [錯誤] \033[0m 檢測到 Peerflix Server 已安裝，如需繼續，請先移除 !"
 		exit 1
 	fi
 
 	check_sys
-# 系统判断
+# 系統判斷
 	if [ ${release} == "centos" ]; then
 		yum update
 		yum install -y build-essential curl vim xz tar
@@ -69,11 +69,11 @@ installps(){
 		sudo apt-get update
 		sudo apt-get install -y build-essential curl vim xz tar
 	else
-		echo -e "\033[41;37m [错误] \033[0m 本脚本不支持当前系统 !"
+		echo -e "\033[41;37m [錯誤] \033[0m 本腳本不支援目前系統 !"
 		exit 1
 	fi
 	
-	#修改DNS为8.8.8.8
+	#修改DNS為8.8.8.8
 	echo "nameserver 8.8.8.8" > /etc/resolv.conf
 	echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 	
@@ -94,52 +94,52 @@ installps(){
 		ln -s ${node_file}/bin/node /usr/local/bin/node
 		ln -s ${node_file}/bin/npm /usr/local/bin/npm
 	else
-		echo -e "\033[41;37m [错误] \033[0m 不支持 ${bit} !"
+		echo -e "\033[41;37m [錯誤] \033[0m 不支援 ${bit} !"
 		exit 1
 	fi
 	
 	npm install -g peerflix-server
 	
-# 判断是否下载成功
+# 判斷是否下載成功
 	if [ ! -e ${ps_file} ]; then
-		echo -e "\033[41;37m [错误] \033[0m Peerflix Server 安装失败 !"
+		echo -e "\033[41;37m [錯誤] \033[0m Peerflix Server 安裝失敗 !"
 		exit 1
 	fi
 	startps
 }
 startps(){
-# 检查是否安装
+# 檢查是否安裝
 	if [ ! -e ${ps_file} ]; then
-		echo -e "\033[41;37m [错误] \033[0m Peerflix Server 没有安装，请检查 !"
+		echo -e "\033[41;37m [錯誤] \033[0m Peerflix Server 沒有安裝，請檢查 !"
 		exit 1
 	fi
-# 判断进程是否存在
+# 判斷進程是否存在
 	PID=`ps -ef | grep peerflix-server | grep -v grep | awk '{print $2}'`
 	if [ ! -z $PID ]; then
-		echo -e "\033[41;37m [错误] \033[0m Peerflix Server 进程正在运行，请检查 !"
+		echo -e "\033[41;37m [錯誤] \033[0m Peerflix Server 進程正在執行，請檢查 !"
 		exit 1
 	fi
 	
-	#设置端口
+	#設定埠
 	while true
 	do
-	echo -e "请输入 Peerflix Server 监听端口 [1-65535]"
-	stty erase '^H' && read -p "(默认端口: 9000):" PORT
+	echo -e "請輸入 Peerflix Server 監聽埠 [1-65535]"
+	stty erase '^H' && read -p "(預設埠: 9000):" PORT
 	[ -z "$PORT" ] && PORT="9000"
 	expr ${PORT} + 0 &>/dev/null
 	if [ $? -eq 0 ]; then
 		if [ ${PORT} -ge 1 ] && [ ${PORT} -le 65535 ]; then
 			echo
 			echo "——————————————————————————————"
-			echo -e "	端口 : \033[41;37m ${PORT} \033[0m"
+			echo -e "	埠 : \033[41;37m ${PORT} \033[0m"
 			echo "——————————————————————————————"
 			echo
 			break
 		else
-			echo "输入错误，请输入正确的数字 !"
+			echo "輸入錯誤，請輸入正確的數位 !"
 		fi
 	else
-		echo "输入错误，请输入正确的数字 !"
+		echo "輸入錯誤，請輸入正確的數位 !"
 	fi
 	done
 	
@@ -153,28 +153,28 @@ startps(){
 	PORT=${PORT} nohup node ${ps_file}>> ${ps_file}/peerflixs.log 2>&1 &
 	
 	sleep 2s
-	# 判断进程是否存在
+	# 判斷進程是否存在
 	PID=`ps -ef | grep peerflix-server | grep -v grep | awk '{print $2}'`
 	if [ -z $PID ]; then
 		echo
-		echo -e "\033[41;37m [错误] \033[0m Peerflix Server 启动失败 !"
+		echo -e "\033[41;37m [錯誤] \033[0m Peerflix Server 啟動失敗 !"
 		exit 1
 	fi
-	# 获取IP
+	# 獲取IP
 	ip=`curl -m 10 -s http://members.3322.org/dyndns/getip`
 	if [ -z $ip ]; then
 		ip="ip"
 	fi
 	echo
-	echo "Peerflix Server 已启动 !"
-	echo -e "浏览器访问，地址： \033[41;37m http://${ip}:${PORT} \033[0m "
+	echo "Peerflix Server 已啟動 !"
+	echo -e "瀏覽器訪問，地址： \033[41;37m http://${ip}:${PORT} \033[0m "
 	echo
 }
 stopps(){
-# 判断进程是否存在
+# 判斷進程是否存在
 	PID=`ps -ef | grep peerflix-server | grep -v grep | awk '{print $2}'`
 	if [ -z $PID ]; then
-		echo -e "\033[41;37m [错误] \033[0m 没有发现 Peerflix Server 进程运行，请检查 !"
+		echo -e "\033[41;37m [錯誤] \033[0m 沒有發現 Peerflix Server 進程執行，請檢查 !"
 		exit 1
 	fi
 	deliptables
@@ -183,7 +183,7 @@ stopps(){
 	PID=`ps -ef | grep peerflix-server | grep -v grep | awk '{print $2}'`
 	if [ ! -z $PID ];
 	then
-		echo -e "\033[41;37m [错误] \033[0m Peerflix Server 停止失败 !"
+		echo -e "\033[41;37m [錯誤] \033[0m Peerflix Server 停止失敗 !"
 		exit 1
 	else
 		echo
@@ -191,12 +191,12 @@ stopps(){
 		echo
 	fi
 }
-# 查看日志
+# 查看日誌
 tailps(){
-# 判断日志是否存在
+# 判斷日誌是否存在
 	if [ ! -e ${ps_file}/peerflixs.log ];
 	then
-		echo -e "\033[41;37m [错误] \033[0m Peerflix Server 日志文件不存在 !"
+		echo -e "\033[41;37m [錯誤] \033[0m Peerflix Server 日誌檔案不存在 !"
 		exit 1
 	else
 		tail -f ${ps_file}/peerflixs.log
@@ -204,18 +204,18 @@ tailps(){
 }
 autops(){
 	if [ ! -e ${ps_file} ]; then
-		echo -e "\033[41;37m [错误] \033[0m Peerflix Server 没有安装，开始安装 !"
+		echo -e "\033[41;37m [錯誤] \033[0m Peerflix Server 沒有安裝，開始安裝 !"
 		installps
 	else
 		PID=`ps -ef | grep peerflix-server | grep -v grep | awk '{print $2}'`
 		if [ -z $PID ];
 		then
-			echo -e "\033[41;37m [错误] \033[0m Peerflix Server 没有启动，开始启动 !"
+			echo -e "\033[41;37m [錯誤] \033[0m Peerflix Server 沒有啟動，開始啟動 !"
 			startps
 		else
-			printf "Peerflix Server 正在运行，是否停止 ? (y/N)"
+			printf "Peerflix Server 正在執行，是否停止 ? (y/N)"
 			printf "\n"
-			stty erase '^H' && read -p "(默认: n):" autoyn
+			stty erase '^H' && read -p "(預設: n):" autoyn
 			[ -z ${autoyn} ] && autoyn="n"
 			if [[ ${autoyn} == [Yy] ]]; then
 				stopps
@@ -224,15 +224,15 @@ autops(){
 	fi
 }
 uninstallps(){
-# 检查是否安装
+# 檢查是否安裝
 	if [ ! -e ${ps_file} ]; then
-		echo -e "\033[41;37m [错误] \033[0m Peerflix Server 没有安装，请检查 !"
+		echo -e "\033[41;37m [錯誤] \033[0m Peerflix Server 沒有安裝，請檢查 !"
 		exit 1
 	fi
 
-	printf "确定要卸载 Peerflix Server ? (y/N)"
+	printf "確定要移除 Peerflix Server ? (y/N)"
 	printf "\n"
-	stty erase '^H' && read -p "(默认: n):" unyn
+	stty erase '^H' && read -p "(預設: n):" unyn
 	[ -z ${unyn} ] && unyn="n"
 	if [[ ${unyn} == [Yy] ]]; then
 		PID=`ps -ef | grep peerflix-server | grep -v grep | awk '{print $2}'`
@@ -244,11 +244,11 @@ uninstallps(){
 		rm -rf /usr/local/bin/npm
 		rm -rf ${node_file}
 		echo
-		echo "Peerflix Server 卸载完成 !"
+		echo "Peerflix Server 移除完成 !"
 		echo
 	else
 		echo
-		echo "卸载已取消..."
+		echo "移除已取消..."
 		echo
 	fi
 }
@@ -260,7 +260,7 @@ case "$action" in
 	${action}ps
 	;;
 	*)
-	echo "输入错误 !"
+	echo "輸入錯誤 !"
 	echo "用法: {install | start | stop | tail | uninstall}"
 	;;
 esac
