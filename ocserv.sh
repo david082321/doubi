@@ -78,14 +78,14 @@ Download_ocserv(){
 	
 	if [[ -e ${file} ]]; then
 		mkdir "${conf_file}"
-		wget --no-check-certificate -N -P "${conf_file}" "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/ocserv.conf"
+		wget --no-check-certificate -N -P "${conf_file}" "https://raw.githubusercontent.com/david082321/doubi/master/other/ocserv.conf"
 		[[ ! -s "${conf}" ]] && echo -e "${Error} ocserv 設定檔案下載失敗 !" && rm -rf "${conf_file}" && exit 1
 	else
 		echo -e "${Error} ocserv 編譯安裝失敗，請檢查！" && exit 1
 	fi
 }
 Service_ocserv(){
-	if ! wget --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/ocserv_debian -O /etc/init.d/ocserv; then
+	if ! wget --no-check-certificate https://raw.githubusercontent.com/david082321/doubi/master/other/ocserv_debian -O /etc/init.d/ocserv; then
 		echo -e "${Error} ocserv 服務 管理腳本下載失敗 !" && over
 	fi
 	chmod +x /etc/init.d/ocserv
@@ -146,7 +146,7 @@ Installation_dependency(){
 		echo -e "${Error} 本腳本不支援 CentOS 系統 !" && exit 1
 	elif [[ ${release} = "debian" ]]; then
 		mv /etc/apt/sources.list /etc/apt/sources.list.bak
-		wget --no-check-certificate -O "/etc/apt/sources.list" "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/sources/us.sources.list"
+		wget --no-check-certificate -O "/etc/apt/sources.list" "https://raw.githubusercontent.com/david082321/doubi/master/sources/us.sources.list"
 		apt-get update
 		apt-get install vim net-tools pkg-config build-essential libgnutls28-dev libwrap0-dev liblz4-dev libseccomp-dev libreadline-dev libnl-nf-3-dev libev-dev gnutls-bin -y
 		rm -rf /etc/apt/sources.list
@@ -491,14 +491,14 @@ Set_iptables(){
 }
 Update_Shell(){
 	echo -e "目前版本為 [ ${sh_ver} ]，開始檢測最新版本..."
-	sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ocserv.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
+	sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/david082321/doubi/master/ocserv.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 檢測最新版本失敗 !" && exit 1
 	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
 		echo -e "發現新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
 		stty erase '^H' && read -p "(預設: y):" yn
 		[[ -z "${yn}" ]] && yn="y"
 		if [[ ${yn} == [Yy] ]]; then
-			wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ocserv.sh && chmod +x ocserv.sh
+			wget -N --no-check-certificate https://raw.githubusercontent.com/david082321/doubi/master/ocserv.sh && chmod +x ocserv.sh
 			echo -e "腳本已更新為最新版本[ ${sh_new_ver} ] !"
 		else
 			echo && echo "	已取消..." && echo

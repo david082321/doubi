@@ -428,14 +428,14 @@ Debian / Ubuntu 系統：apt-get install iptables -y"
 }
 Update_Shell(){
 	echo -e "目前版本為 [ ${sh_ver} ]，開始檢測最新版本..."
-	sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ban_iptables.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
+	sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/david082321/doubi/master/ban_iptables.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 檢測最新版本失敗 !" && exit 1
 	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
 		echo -e "發現新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
 		stty erase '^H' && read -p "(預設: y):" yn
 		[[ -z "${yn}" ]] && yn="y"
 		if [[ ${yn} == [Yy] ]]; then
-			wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ban_iptables.sh && chmod +x ban_iptables.sh
+			wget -N --no-check-certificate https://raw.githubusercontent.com/david082321/doubi/master/ban_iptables.sh && chmod +x ban_iptables.sh
 			echo -e "腳本已更新為最新版本[ ${sh_new_ver} ] !"
 		else
 			echo && echo "	已取消..." && echo

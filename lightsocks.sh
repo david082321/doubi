@@ -102,14 +102,14 @@ Download_lightsocks(){
 }
 Service_lightsocks(){
 	if [[ ${release} = "centos" ]]; then
-		if ! wget --no-check-certificate "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/lightsocks_centos" -O /etc/init.d/lightsocks; then
+		if ! wget --no-check-certificate "https://raw.githubusercontent.com/david082321/doubi/master/other/lightsocks_centos" -O /etc/init.d/lightsocks; then
 			echo -e "${Error} Lightsocks服務 管理腳本下載失敗 !" && rm -rf "${file}" && exit 1
 		fi
 		chmod +x "/etc/init.d/lightsocks"
 		chkconfig --add lightsocks
 		chkconfig lightsocks on
 	else
-		if ! wget --no-check-certificate "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/lightsocks_debian" -O /etc/init.d/lightsocks; then
+		if ! wget --no-check-certificate "https://raw.githubusercontent.com/david082321/doubi/master/other/lightsocks_debian" -O /etc/init.d/lightsocks; then
 			echo -e "${Error} Lightsocks服務 管理腳本下載失敗 !" && rm -rf "${file}" && exit 1
 		fi
 		chmod +x "/etc/init.d/lightsocks"
@@ -535,7 +535,7 @@ Set_iptables(){
 Update_Shell(){
 	echo -e "目前版本為 [ ${sh_ver} ]，開始檢測最新版本..."
 	sh_new_ver=$(wget --no-check-certificate -qO- "https://softs.loan/Bash/lightsocks.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="softs"
-	[[ -z ${sh_new_ver} ]] && sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/lightsocks.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
+	[[ -z ${sh_new_ver} ]] && sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/david082321/doubi/master/lightsocks.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 檢測最新版本失敗 !" && exit 0
 	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
 		echo -e "發現新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
@@ -545,7 +545,7 @@ Update_Shell(){
 			if [[ ${sh_new_type} == "softs" ]]; then
 				wget -N --no-check-certificate https://softs.loan/Bash/lightsocks.sh && chmod +x lightsocks.sh
 			else
-				wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/lightsocks.sh && chmod +x lightsocks.sh
+				wget -N --no-check-certificate https://raw.githubusercontent.com/david082321/doubi/master/lightsocks.sh && chmod +x lightsocks.sh
 			fi
 			echo -e "腳本已更新為最新版本[ ${sh_new_ver} ] !"
 		else

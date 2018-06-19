@@ -126,14 +126,14 @@ Service_brook(){
 		fi
 	else
 		if [[ ${release} = "centos" ]]; then
-			if ! wget --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/brook-pf_centos -O /etc/init.d/brook-pf; then
+			if ! wget --no-check-certificate https://raw.githubusercontent.com/david082321/doubi/master/other/brook-pf_centos -O /etc/init.d/brook-pf; then
 				echo -e "${Error} Brook服務 管理腳本下載失敗 !" && exit 1
 			fi
 			chmod +x /etc/init.d/brook-pf
 			chkconfig --add brook-pf
 			chkconfig brook-pf on
 		else
-			if ! wget --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/other/brook-pf_debian -O /etc/init.d/brook-pf; then
+			if ! wget --no-check-certificate https://raw.githubusercontent.com/david082321/doubi/master/other/brook-pf_debian -O /etc/init.d/brook-pf; then
 				echo -e "${Error} Brook服務 管理腳本下載失敗 !" && exit 1
 			fi
 			chmod +x /etc/init.d/brook-pf
@@ -582,7 +582,7 @@ Set_iptables(){
 Update_Shell(){
 	echo -e "目前版本為 [ ${sh_ver} ]，開始檢測最新版本..."
 	sh_new_ver=$(wget --no-check-certificate -qO- "https://softs.loan/Bash/brook-pf.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="softs"
-	[[ -z ${sh_new_ver} ]] && sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/brook-pf.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
+	[[ -z ${sh_new_ver} ]] && sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/david082321/doubi/master/brook-pf.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 檢測最新版本失敗 !" && exit 0
 	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
 		echo -e "發現新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
@@ -592,7 +592,7 @@ Update_Shell(){
 			if [[ $sh_new_type == "softs" ]]; then
 				wget -N --no-check-certificate https://softs.loan/Bash/brook-pf.sh && chmod +x brook.sh
 			else
-				wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/brook-pf.sh && chmod +x brook.sh
+				wget -N --no-check-certificate https://raw.githubusercontent.com/david082321/doubi/master/brook-pf.sh && chmod +x brook.sh
 			fi
 			echo -e "腳本已更新為最新版本[ ${sh_new_ver} ] !"
 		else
