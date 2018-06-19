@@ -25,188 +25,188 @@ Red_background_prefix="\033[41;37m"
 Font_color_suffix="\033[0m"
 
 Separator_1="——————————————————————————————"
-# 脚本文字变量(Translation)
+# 腳本文字變數(Translation)
 Language(){
 	if [[ ! -e "${PWD}/lang_en" ]]; then
-		Word_default="默认"
-		Word_unlimited="无限"
-		Word_user="用户"
-		Word_port="端口"
-		Word_pass="密码"
+		Word_default="預設"
+		Word_unlimited="無限"
+		Word_user="使用者"
+		Word_port="埠"
+		Word_pass="密碼"
 		Word_method="加密"
-		Word_protocol="协议"
+		Word_protocol="協議"
 		Word_obfs="混淆"
-		Word_ss_like=" SS    链接"
-		Word_ss_qr_code=" SS  二维码"
-		Word_ssr_like=" SSR   链接"
-		Word_ssr_qr_code=" SSR 二维码"
-		Word_single_port="单端口"
-		Word_multi_port="多端口"
-		Word_current_mode="当前模式"
-		Word_current_status="当前状态"
-		Word_number_of_devices="设备数"
-		Word_number_of_devices_limit="设备数限制"
-		Word_single_threaded_speed_limit="单线程限速"
-		Word_port_total_speed_limit="端口总限速"
-		Word_the_installation_is_complete="安装完成"
-		Word_installation_failed="安装失败"
-		Word_uninstall_is_complete="卸载完成"
-		Word_uninstall_cancelled="卸载已取消..."
+		Word_ss_like=" SS    連結"
+		Word_ss_qr_code=" SS  二維碼"
+		Word_ssr_like=" SSR   連結"
+		Word_ssr_qr_code=" SSR 二維碼"
+		Word_single_port="單埠"
+		Word_multi_port="多埠"
+		Word_current_mode="目前模式"
+		Word_current_status="目前狀態"
+		Word_number_of_devices="設備數"
+		Word_number_of_devices_limit="設備數限制"
+		Word_single_threaded_speed_limit="單執行緒限速"
+		Word_port_total_speed_limit="埠總限速"
+		Word_the_installation_is_complete="安裝完成"
+		Word_installation_failed="安裝失敗"
+		Word_uninstall_is_complete="移除完成"
+		Word_uninstall_cancelled="移除已取消..."
 		Word_canceled="已取消..."
 		Word_cancel="取消"
-		Word_startup_failed="启动失败"
-		Word_stop_failing="停止失败"
+		Word_startup_failed="啟動失敗"
+		Word_stop_failing="停止失敗"
 		Word_stopped="已停止"
-		Word_installed="已安装"
-		Word_not_installed="未安装"
-		Word_has_started="已启动"
-		Word_have_not_started="未启动"
-		Word_running="正在运行"
-		Word_not_running="没有运行"
-		Word_info="信息"
-		Word_error="错误"
+		Word_installed="已安裝"
+		Word_not_installed="未安裝"
+		Word_has_started="已啟動"
+		Word_have_not_started="未啟動"
+		Word_running="正在執行"
+		Word_not_running="沒有執行"
+		Word_info="訊息"
+		Word_error="錯誤"
 		Word_Prompt="提示"
-		Word_timing_interval="定时间隔"
-		Word_and="并"
+		Word_timing_interval="定時間隔"
+		Word_and="並"
 		Word_but="但"
-		Word_serverspeeder="锐速"
+		Word_serverspeeder="銳速"
 	
-		Info_switch_single_port_mode="你确定要切换模式为 ${Word_single_port} ?[y/N]"
-		Info_switch_multi_port_mode="你确定要切换模式为 ${Word_multi_port} ?[y/N]"
-		Info_input_port="请输入ShadowsocksR ${Word_port} [1-65535]"
-		Info_input_pass="请输入ShadowsocksR ${Word_pass}"
-		Info_input_method="请输入数字 来选择ShadowsocksR ${Word_method}"
-		Info_input_protocol="请输入数字 来选择ShadowsocksR ${Word_protocol}( auth_aes128_* 以后的协议不再支持 兼容原版 )"
-		Info_input_number_of_devices="请输入 ShadowsocksR账号欲限制的设备数 (${Green_font_prefix} auth_* 系列协议 不兼容原版才有效 ${Font_color_suffix})"
-		Prompt_number_of_devices="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}该设备数限制，指的是每个端口同一时间能链接的客户端数量(多端口模式，每个端口都是独立计算)。"
-		Info_input_obfs="请输入数字 来选择ShadowsocksR ${Word_obfs}"
-		Info_protocol_compatible="是否设置 协议 兼容原版 ( _compatible )? [Y/n] :"
-		Info_obfs_compatible="是否设置 混淆 兼容原版 ( _compatible )? [Y/n] :"
-		Info_protocol_obfs_compatible="是否设置 协议/混淆 兼容原版 ( _compatible )? [Y/n] :"
-		Info_input_single_threaded_speed_limit="请输入 你要设置的每个端口 单线程 限速上限(单位：KB/S)"
-		Prompt_input_single_threaded_speed_limit="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}这个指的是，每个端口 单线程的限速上限，多线程即无效。"
-		Info_total_port_speed_limit="请输入 你要设置的每个端口 总速度 限速上限(单位：KB/S)"
-		Prompt_total_port_speed_limit="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}这个指的是，每个端口 总速度 限速上限，单个端口整体限速。"
+		Info_switch_single_port_mode="你確定要切換模式為 ${Word_single_port} ?[y/N]"
+		Info_switch_multi_port_mode="你確定要切換模式為 ${Word_multi_port} ?[y/N]"
+		Info_input_port="請輸入ShadowsocksR ${Word_port} [1-65535]"
+		Info_input_pass="請輸入ShadowsocksR ${Word_pass}"
+		Info_input_method="請輸入數字 來選擇ShadowsocksR ${Word_method}"
+		Info_input_protocol="請輸入數字 來選擇ShadowsocksR ${Word_protocol}( auth_aes128_* 以後的協議不再支援 相容原版 )"
+		Info_input_number_of_devices="請輸入 ShadowsocksR帳號欲限制的設備數 (${Green_font_prefix} auth_* 系列協議 不相容原版才有效 ${Font_color_suffix})"
+		Prompt_number_of_devices="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}該設備數限制，指的是每個埠同一時間能連結的使用者端數量(多埠模式，每個埠都是獨立計算)。"
+		Info_input_obfs="請輸入數字 來選擇ShadowsocksR ${Word_obfs}"
+		Info_protocol_compatible="是否設定 協議 相容原版 ( _compatible )? [Y/n] :"
+		Info_obfs_compatible="是否設定 混淆 相容原版 ( _compatible )? [Y/n] :"
+		Info_protocol_obfs_compatible="是否設定 協議/混淆 相容原版 ( _compatible )? [Y/n] :"
+		Info_input_single_threaded_speed_limit="請輸入 你要設置的每個埠 單執行緒 限速上限(單位：KB/S)"
+		Prompt_input_single_threaded_speed_limit="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}這個指的是，每個埠 單執行緒的限速上限，多執行緒即無效。"
+		Info_total_port_speed_limit="請輸入 你要設置的每個埠 總速度 限速上限(單位：KB/S)"
+		Prompt_total_port_speed_limit="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}這個指的是，每個埠 總速度 限速上限，單個埠整體限速。"
 	
-		Info_input_modify_the_type="请输入数字 来选择你要修改的类型 :
+		Info_input_modify_the_type="請輸入數字 來選擇你要修改的類型 :
 1. 修改 ${Word_port}/${Word_pass}
 2. 修改 ${Word_method}/${Word_protocol}/${Word_obfs}"
-		info_input_select_user_id_modified="请选择并输入 你要修改的用户前面的数字 :"
-		Info_input_select_user_id_del="请选择并输入 你要删除的用户前面的数字 :"
+		info_input_select_user_id_modified="請選擇並輸入 你要修改的使用者前面的數位 :"
+		Info_input_select_user_id_del="請選擇並輸入 你要刪除的使用者前面的數位 :"
 		Prompt_method_protocol_obfs_modified="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} ShadowsocksR ${Word_method}/${Word_protocol}/${Word_obfs}已修改!"
 
-		Info_jq_installation_is_complete="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} JSON解析器 JQ 安装完成，继续..."
-		Info_jq_is_installed="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} 检测到 JSON解析器 JQ 已安装，继续..."
-		Info_uninstall_ssr="确定要卸载 ShadowsocksR ? [y/N]"
-		Info_uninstall_server_speeder="确定要卸载 ${Word_serverspeeder} ? [y/N]"
-		Info_install_bbr="确定要安装 BBR ? [y/n]"
-		Info_install_bbr_0="${Green_font_prefix} [安装前 请注意] ${Font_color_suffix}
-1. 安装开启BBR，需要更换内核，存在更换失败等风险(重启后无法开机)
-2. 本脚本仅支持 Debian / Ubuntu 系统更换内核，OpenVZ虚拟化 不支持更换内核 !
-3. Debian 更换内核过程中会提示 [ 是否终止卸载内核 ] ，请选择 ${Green_font_prefix} NO ${Font_color_suffix}
-4. 安装BBR并重启后，需要重新运行脚本开启BBR ${Green_font_prefix} bash bbr.sh start ${Font_color_suffix}"
-		Info_input_set_crontab_interval="请输入ShadowsocksR 定时重启的间隔"
-		Info_input_set_crontab_interval_default="每天凌晨2点0分 [0 2 * * *]"
-		Info_set_crontab_interval_0="${Green_font_prefix} 格式说明 : ${Font_color_suffix}
- 格式: ${Green_font_prefix} * * * * * ${Font_color_suffix}，分别对应 ${Green_font_prefix} 分钟 小时 日 月 星期 ${Font_color_suffix}
- 示例: ${Green_font_prefix} 30 2 * * * ${Font_color_suffix}，每天 凌晨2点30分时 重启一次
- 示例: ${Green_font_prefix} 30 2 */3 * * ${Font_color_suffix}，每隔3天 凌晨2点30分时 重启一次
- 示例: ${Green_font_prefix} 30 */2 * * * ${Font_color_suffix}，每天 每隔两小时 在30分时 重启一次"
-		Info_no_cron_installed="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} 检测到没有安装 corn ，开始安装..."
-		Info_input_set_cron="请输入数字 来选择你要做什么
-1. 添加 定时任务
-2. 删除 定时任务
- ${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}暂时只能添加设置一个定时重启任务。"
-		Info_set_corn_status="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} corn 当前没有定时重启任务 !"
-		Info_set_corn_del_success="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} corn 删除定时重启任务成功 !"
-		Info_set_corn_add_success="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} ShadowsocksR 定时重启任务添加成功 !"
-		Info_limit_the_number_of_devices="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} ShadowsocksR 设备数限制 已修改 !"
-		Info_port_speed_limit="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} ShadowsocksR 端口限速 已修改 !"
+		Info_jq_installation_is_complete="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} JSON解析器 JQ 安裝完成，繼續..."
+		Info_jq_is_installed="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} 檢測到 JSON解析器 JQ 已安裝，繼續..."
+		Info_uninstall_ssr="確定要移除 ShadowsocksR ? [y/N]"
+		Info_uninstall_server_speeder="確定要移除 ${Word_serverspeeder} ? [y/N]"
+		Info_install_bbr="確定要安裝 BBR ? [y/n]"
+		Info_install_bbr_0="${Green_font_prefix} [安裝前 請注意] ${Font_color_suffix}
+1. 安裝開啟BBR，需要更換核心，存在更換失敗等風險(重啟後無法開機)
+2. 本腳本僅支援 Debian / Ubuntu 系統更換核心，OpenVZ虛擬化 不支援更換核心 !
+3. Debian 更換核心過程中會提示 [ 是否終止移除核心 ] ，請選擇 ${Green_font_prefix} NO ${Font_color_suffix}
+4. 安裝BBR並重啟後，需要重新執行腳本開啟BBR ${Green_font_prefix} bash bbr.sh start ${Font_color_suffix}"
+		Info_input_set_crontab_interval="請輸入ShadowsocksR 定時重啟的間隔"
+		Info_input_set_crontab_interval_default="每天凌晨2點0分 [0 2 * * *]"
+		Info_set_crontab_interval_0="${Green_font_prefix} 格式說明 : ${Font_color_suffix}
+ 格式: ${Green_font_prefix} * * * * * ${Font_color_suffix}，分別對應 ${Green_font_prefix} 分鐘 小時 日 月 星期 ${Font_color_suffix}
+ 範例: ${Green_font_prefix} 30 2 * * * ${Font_color_suffix}，每天 凌晨2點30分時 重啟一次
+ 範例: ${Green_font_prefix} 30 2 */3 * * ${Font_color_suffix}，每隔3天 凌晨2點30分時 重啟一次
+ 範例: ${Green_font_prefix} 30 */2 * * * ${Font_color_suffix}，每天 每隔兩小時 在30分時 重啟一次"
+		Info_no_cron_installed="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} 檢測到沒有安裝 corn ，開始安裝..."
+		Info_input_set_cron="請輸入數字 來選擇你要做什麼
+1. 添加 定時任務
+2. 刪除 定時任務
+ ${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}暫時只能添加設定一個定時重啟任務。"
+		Info_set_corn_status="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} corn 目前沒有定時重啟任務 !"
+		Info_set_corn_del_success="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} corn 刪除定時重啟任務成功 !"
+		Info_set_corn_add_success="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} ShadowsocksR 定時重啟任務添加成功 !"
+		Info_limit_the_number_of_devices="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} ShadowsocksR 設備數限制 已修改 !"
+		Info_port_speed_limit="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} ShadowsocksR 埠限速 已修改 !"
 		Info_switch_language_english="Are you sure you want to switch the script language to English ? [y/n]"
-		Info_switch_language_chinese="确定要切换脚本语言为 中文 ? [y/n]"
+		Info_switch_language_chinese="確定要切換腳本語言為 中文 ? [y/n]"
 		Info_switch_language_1="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} Re-run the script to see the language after switching !"
 
-		Errpr_input_num_error="${Red_font_prefix}[${Word_error}]${Font_color_suffix} 请输入正确的数字 !"
-		Error_not_install_ssr="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 没有发现安装ShadowsocksR，请检查 !"
-		Error_ssr_installed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR已安装 !"
-		Error_no_multi_port_users_were_found="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 没有发现 多端口用户，请检查 !"
-		Error_jq_installation_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} JSON解析器 JQ 安装失败 !"
-		Error_does_not_support_the_system="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 本脚本不支持当前系统 !"
-		Error_ssr_download_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 下载失败 !"
-		Error_ssr_failed_to_start="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 启动失败 !"
-		Error_the_current_mode_is_single_port="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 当前模式为 单端口，请检查 !"
-		Error_the_current_mode_is_multi_port="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 当前模式为 多端口，请检查 !"
-		Error_multi_port_user_remaining_one="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 当前多端口用户 仅剩一个，无法删除 !"
-		Error_startup_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 启动失败, 请检查日志 !"
-		Error_no_log_found="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 没有找到日志文件，请检查 !"
-		Error_server_speeder_installed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ${Word_serverspeeder} 已安装 !"
-		Error_server_speeder_installation_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ${Word_serverspeeder} 安装失败 !"
-		Error_server_speeder_not_installed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ${Word_serverspeeder} 没有安装，请检查 !"
-		Error_cron_installation_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} corn 安装失败 !"
-		Error_set_corn_del_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} corn 删除定时重启任务失败 !"
-		Error_set_corn_add_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 定时重启任务添加失败 !"
-		Error_set_corn_Write_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 定时重启脚本写入失败 !"
-		Error_limit_the_number_of_devices_1="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR当前协议为 兼容原版(_compatible)，限制设备数无效 !"
-		Error_limit_the_number_of_devices_2="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR当前协议为 原版(origin)，限制设备数无效 !"
+		Errpr_input_num_error="${Red_font_prefix}[${Word_error}]${Font_color_suffix} 請輸入正確的數位 !"
+		Error_not_install_ssr="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 沒有發現安裝ShadowsocksR，請檢查 !"
+		Error_ssr_installed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR已安裝 !"
+		Error_no_multi_port_users_were_found="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 沒有發現 多埠使用者，請檢查 !"
+		Error_jq_installation_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} JSON解析器 JQ 安裝失敗 !"
+		Error_does_not_support_the_system="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 本腳本不支援目前系統 !"
+		Error_ssr_download_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 下載失敗 !"
+		Error_ssr_failed_to_start="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 啟動失敗 !"
+		Error_the_current_mode_is_single_port="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 目前模式為 單埠，請檢查 !"
+		Error_the_current_mode_is_multi_port="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 目前模式為 多埠，請檢查 !"
+		Error_multi_port_user_remaining_one="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 目前多埠使用者 僅剩一個，無法刪除 !"
+		Error_startup_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 啟動失敗, 請檢查日誌 !"
+		Error_no_log_found="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 沒有找到日誌檔案，請檢查 !"
+		Error_server_speeder_installed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ${Word_serverspeeder} 已安裝 !"
+		Error_server_speeder_installation_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ${Word_serverspeeder} 安裝失敗 !"
+		Error_server_speeder_not_installed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ${Word_serverspeeder} 沒有安裝，請檢查 !"
+		Error_cron_installation_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} corn 安裝失敗 !"
+		Error_set_corn_del_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} corn 刪除定時重啟任務失敗 !"
+		Error_set_corn_add_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 定時重啟任務添加失敗 !"
+		Error_set_corn_Write_failed="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 定時重啟腳本寫入失敗 !"
+		Error_limit_the_number_of_devices_1="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR目前協議為 相容原版(_compatible)，限制設備數無效 !"
+		Error_limit_the_number_of_devices_2="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR目前協議為 原版(origin)，限制設備數無效 !"
 
-		Prompt_method_libsodium="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}chacha20*等加密方式 需要安装 libsodium 支持库，否则会启动失败 !"
-		Prompt_any_key="请按任意键继续，如有配置错误请使用 Ctrl+C 退出。"
-		Prompt_check_if_the_configuration_is_incorrect="请检查Shadowsocks账号配置是否有误 !"
-		Prompt_your_account_configuration="你的ShadowsocksR 账号配置 :"
-		Prompt_ssr_status_on="ShadowsocksR 正在运行 !"
-		Prompt_ssr_status_off="ShadowsocksR 没有运行 !"
+		Prompt_method_libsodium="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}chacha20*等加密方式 需要安裝 libsodium 支援庫，否則會啟動失敗 !"
+		Prompt_any_key="請按任意鍵繼續，如有設定錯誤請使用 Ctrl+C 退出。"
+		Prompt_check_if_the_configuration_is_incorrect="請檢查Shadowsocks帳號設定是否有誤 !"
+		Prompt_your_account_configuration="你的ShadowsocksR 帳號設定 :"
+		Prompt_ssr_status_on="ShadowsocksR 正在執行 !"
+		Prompt_ssr_status_off="ShadowsocksR 沒有執行 !"
 		Prompt_tip="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}
- 浏览器中，打开二维码链接，就可以看到二维码图片。
- 协议和混淆后面的[ _compatible ]，指的是兼容原版Shadowsocks协议/混淆。"
-		Prompt_total_number_of_users="当前用户配置总数为:"
-		Prompt_total_number_of_ip="当前链接的IP总数为:"
-		Prompt_the_currently_connected_ip="当前连接的IP:"
-		Prompt_total_number_of_ip_number="IP数量:"
-		Prompt_modify_multi_port_user="多端口用户已修改 !"
-		Prompt_add_multi_port_user="多端口用户已添加 !"
-		Prompt_del_multi_port_user="多端口用户已删除 !"
-		Prompt_log="使用 ${Red_font_prefix} Ctrl+C ${Font_color_suffix} 键退出查看日志 !"
+ 瀏覽器中，打開二維碼連結，就可以看到二維碼圖片。
+ 協議和混淆後面的[ _compatible ]，指的是相容原版Shadowsocks協議/混淆。"
+		Prompt_total_number_of_users="目前使用者設定總數為:"
+		Prompt_total_number_of_ip="目前連結的IP總數為:"
+		Prompt_the_currently_connected_ip="目前連接的IP:"
+		Prompt_total_number_of_ip_number="IP數量:"
+		Prompt_modify_multi_port_user="多埠使用者已修改 !"
+		Prompt_add_multi_port_user="多埠使用者已添加 !"
+		Prompt_del_multi_port_user="多埠使用者已刪除 !"
+		Prompt_log="使用 ${Red_font_prefix} Ctrl+C ${Font_color_suffix} 鍵退出查看日誌 !"
 		Prompt_switch_language_chinese=" The current scripting language: English"
-		Prompt_switch_language_english=" 当前脚本语言为:  中文"
+		Prompt_switch_language_english=" 目前腳本語言為:  中文"
 
-#菜单
-		Menu_prompt_1="请输入一个数字来选择对应的选项" 
-		Menu_prompt_2="(请输入数字 0-27): "
-		Menu_prompt_3="请选择并输入数字 0-27"
-		Menu_options="${Green_font_prefix}  1. ${Font_color_suffix}安装 ShadowsocksR
-${Green_font_prefix}  2. ${Font_color_suffix}安装 libsodium(chacha20)
-${Green_font_prefix}  3. ${Font_color_suffix}显示 单/多端口 账号信息
-${Green_font_prefix}  4. ${Font_color_suffix}显示 单/多端口 连接信息
-${Green_font_prefix}  5. ${Font_color_suffix}修改 单端口用户配置
-${Green_font_prefix}  6. ${Font_color_suffix}手动 修改  用户配置
-${Green_font_prefix}  7. ${Font_color_suffix}卸载 ShadowsocksR
+#選單
+		Menu_prompt_1="請輸入一個數字來選擇對應的選項" 
+		Menu_prompt_2="(請輸入數字 0-27): "
+		Menu_prompt_3="請選擇並輸入數字 0-27"
+		Menu_options="${Green_font_prefix}  1. ${Font_color_suffix}安裝 ShadowsocksR
+${Green_font_prefix}  2. ${Font_color_suffix}安裝 libsodium(chacha20)
+${Green_font_prefix}  3. ${Font_color_suffix}顯示 單/多埠 帳號訊息
+${Green_font_prefix}  4. ${Font_color_suffix}顯示 單/多埠 連接訊息
+${Green_font_prefix}  5. ${Font_color_suffix}修改 單埠使用者設定
+${Green_font_prefix}  6. ${Font_color_suffix}手動 修改  使用者設定
+${Green_font_prefix}  7. ${Font_color_suffix}移除 ShadowsocksR
 ${Green_font_prefix}  8. ${Font_color_suffix}更新 ShadowsocksR
 ——————————————————
-${Green_font_prefix}  9. ${Font_color_suffix}切换 单/多端口 模式
-${Green_font_prefix} 10. ${Font_color_suffix}添加 多端口用户配置
-${Green_font_prefix} 11. ${Font_color_suffix}修改 多端口用户配置
-${Green_font_prefix} 12. ${Font_color_suffix}删除 多端口用户配置
+${Green_font_prefix}  9. ${Font_color_suffix}切換 單/多埠 模式
+${Green_font_prefix} 10. ${Font_color_suffix}添加 多埠使用者設定
+${Green_font_prefix} 11. ${Font_color_suffix}修改 多埠使用者設定
+${Green_font_prefix} 12. ${Font_color_suffix}刪除 多埠使用者設定
 ——————————————————
-${Green_font_prefix} 13. ${Font_color_suffix}启动 ShadowsocksR
+${Green_font_prefix} 13. ${Font_color_suffix}啟動 ShadowsocksR
 ${Green_font_prefix} 14. ${Font_color_suffix}停止 ShadowsocksR
-${Green_font_prefix} 15. ${Font_color_suffix}重启 ShadowsocksR
-${Green_font_prefix} 16. ${Font_color_suffix}查看 ShadowsocksR 状态
-${Green_font_prefix} 17. ${Font_color_suffix}查看 ShadowsocksR 日志
+${Green_font_prefix} 15. ${Font_color_suffix}重啟 ShadowsocksR
+${Green_font_prefix} 16. ${Font_color_suffix}查看 ShadowsocksR 狀態
+${Green_font_prefix} 17. ${Font_color_suffix}查看 ShadowsocksR 日誌
 ——————————————————
-${Green_font_prefix} 18. ${Font_color_suffix}安装 ${Word_serverspeeder}
+${Green_font_prefix} 18. ${Font_color_suffix}安裝 ${Word_serverspeeder}
 ${Green_font_prefix} 19. ${Font_color_suffix}停止 ${Word_serverspeeder}
-${Green_font_prefix} 20. ${Font_color_suffix}重启 ${Word_serverspeeder}
-${Green_font_prefix} 21. ${Font_color_suffix}查看 ${Word_serverspeeder} 状态
-${Green_font_prefix} 22. ${Font_color_suffix}卸载 ${Word_serverspeeder}
+${Green_font_prefix} 20. ${Font_color_suffix}重啟 ${Word_serverspeeder}
+${Green_font_prefix} 21. ${Font_color_suffix}查看 ${Word_serverspeeder} 狀態
+${Green_font_prefix} 22. ${Font_color_suffix}移除 ${Word_serverspeeder}
 ——————————————————"
-		Menu_options_bbr="${Green_font_prefix} 23. ${Font_color_suffix}安装 BBR(需更换内核, 存在风险)"
-		Menu_options_other="${Green_font_prefix} 24. ${Font_color_suffix}封禁 BT/PT/垃圾邮件(SPAM)
-${Green_font_prefix} 25. ${Font_color_suffix}设置 ShadowsocksR 定时重启
-${Green_font_prefix} 26. ${Font_color_suffix}设置 ShadowsocksR 设备数限制
-${Green_font_prefix} 27. ${Font_color_suffix}设置 ShadowsocksR 速度限制
+		Menu_options_bbr="${Green_font_prefix} 23. ${Font_color_suffix}安裝 BBR(需更換核心, 存在風險)"
+		Menu_options_other="${Green_font_prefix} 24. ${Font_color_suffix}封禁 BT/PT/垃圾郵件(SPAM)
+${Green_font_prefix} 25. ${Font_color_suffix}設定 ShadowsocksR 定時重啟
+${Green_font_prefix} 26. ${Font_color_suffix}設定 ShadowsocksR 設備數限制
+${Green_font_prefix} 27. ${Font_color_suffix}設定 ShadowsocksR 速度限制
 ——————————————————
 ${Green_font_prefix}  0. ${Font_color_suffix}The scripting language is English
- 注意事项： ${Word_serverspeeder}/BBR 不支持 OpenVZ !"
+ 注意事項： ${Word_serverspeeder}/BBR 不支援 OpenVZ !"
 	else
 		Word_default="default"
 		Word_unlimited="unlimited"
@@ -256,7 +256,7 @@ ${Green_font_prefix}  0. ${Font_color_suffix}The scripting language is English
 		Info_input_port="Please enter ShadowsocksR ${Word_port} [1-65535]"
 		Info_input_pass="Please enter ShadowsocksR ${Word_pass}"
 		Info_input_method="Please enter the number to select ShadowsocksR ${Word_method}"
-		Info_input_protocol="Please enter the number to select ShadowsocksR ${Word_protocol}( auth_aes128_* 以后的协议不再支持 兼容原版 )"
+		Info_input_protocol="Please enter the number to select ShadowsocksR ${Word_protocol}( auth_aes128_* 以後的協議不再支援 相容原版 )"
 		Info_input_number_of_devices="Please enter the number of devices that ShadowsocksR ports want to restrict (${Green_font_prefix} Auth_ * protocol is not compatible with the original version is valid! ${Font_color_suffix})"
 		Prompt_number_of_devices="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix}The number of devices is limited, referring to the number of clients that can be linked per port (multi_port mode, each port is independently calculated)."
 		Info_input_obfs="Please enter the number to select ShadowsocksR ${Word_obfs}"
@@ -303,8 +303,8 @@ ${Green_font_prefix}  0. ${Font_color_suffix}The scripting language is English
 		Info_limit_the_number_of_devices="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} ShadowsocksR device limit has been modified !"
 		Info_port_speed_limit="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} ShadowsocksR port speed limit has been modified !"
 		Info_switch_language_english="Are you sure you want to switch the script language to English ? [y/n]"
-		Info_switch_language_chinese="确定要切换脚本语言为 中文 ? [y/n]"
-		Info_switch_language_1="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} 重新运行脚本即可看到切换后的语言 !"
+		Info_switch_language_chinese="確定要切換腳本語言為 中文 ? [y/n]"
+		Info_switch_language_1="${Green_font_prefix} [${Word_info}] ${Font_color_suffix} 重新執行腳本即可看到切換後的語言 !"
 
 		Errpr_input_num_error="${Red_font_prefix}[${Word_error}]${Font_color_suffix} Please enter the correct number !"
 		Error_not_install_ssr="${Red_font_prefix} [${Word_error}] ${Font_color_suffix} No installation ShadowsocksR, please check !"
@@ -331,7 +331,7 @@ ${Green_font_prefix}  0. ${Font_color_suffix}The scripting language is English
 
 		Prompt_method_libsodium="${Green_font_prefix} ${Word_Prompt}: ${Font_color_suffix} Chacha20-* and other encryption methods need to install libsodium support library, otherwise it will fail to start !"
 		Prompt_any_key="Please press any key to continue, if the configuration error please use Ctrl + C exit."
-		Prompt_check_if_the_configuration_is_incorrect="请检查Shadowsocks账号配置是否有误 !"
+		Prompt_check_if_the_configuration_is_incorrect="請檢查Shadowsocks帳號設定是否有誤 !"
 		Prompt_your_account_configuration="Your ShadowsocksR account configuration :"
 		Prompt_ssr_status_on="ShadowsocksR is running !"
 		Prompt_ssr_status_off="ShadowsocksR is not running !"
@@ -347,9 +347,9 @@ ${Green_font_prefix}  0. ${Font_color_suffix}The scripting language is English
 		Prompt_del_multi_port_user="multi_port user has been deleted !"
 		Prompt_log="Use ${Red_font_prefix} Ctrl+C ${Font_color_suffix} to exit View Log !"
 		Prompt_switch_language_chinese=" The current scripting language: English"
-		Prompt_switch_language_english=" 当前脚本语言为:  中文"
+		Prompt_switch_language_english=" 目前腳本語言為:  中文"
 
-#菜单
+#選單
 		Menu_prompt_1="Please enter a number to select the corresponding option" 
 		Menu_prompt_2="(Please enter numbers 0-27): "
 		Menu_prompt_3="Please select and enter numbers 0-27 !"
@@ -385,7 +385,7 @@ ${Green_font_prefix} 25. ${Font_color_suffix}Set ShadowsocksR scheduled reboot
 ${Green_font_prefix} 26. ${Font_color_suffix}Set the ShadowsocksR device limit
 ${Green_font_prefix} 27. ${Font_color_suffix}Set the ShadowsocksR speed limit
 ——————————————————
-${Green_font_prefix}  0. ${Font_color_suffix}切换 脚本语言为中文
+${Green_font_prefix}  0. ${Font_color_suffix}切換 腳本語言為中文
  Note: ${Word_serverspeeder} / BBR does not support OpenVZ !"
 	fi
 	Menu_status_1=" ${Word_current_status}: ${Green_font_prefix} ${Word_installed} ${Font_color_suffix} ${Word_and} ${Green_font_prefix} ${Word_has_started} ${Font_color_suffix}"
@@ -394,7 +394,7 @@ ${Green_font_prefix}  0. ${Font_color_suffix}切换 脚本语言为中文
 	Menu_mode_1=" ${Word_current_mode}: ${Green_font_prefix} ${Word_single_port} ${Font_color_suffix}"
 	Menu_mode_2=" ${Word_current_mode}: ${Green_font_prefix} ${Word_multi_port} ${Font_color_suffix}"
 }
-#检查系统
+#檢查系統
 check_sys(){
 	if [[ -f /etc/redhat-release ]]; then
 		release="centos"
@@ -416,13 +416,13 @@ check_sys(){
 SSR_install_status(){
 	[[ ! -e $config_user_file ]] && echo -e "${Error_not_install_ssr}" && exit 1
 }
-#获取IP
+#獲取IP
 getIP(){
 	ip=`curl -m 10 -s "ipinfo.io/ip"`
 	#ip=`wget -qO- -t1 -T2 ipinfo.io/ip`
 	[[ -z "$ip" ]] && ip="VPS_IP"
 }
-#获取用户账号信息
+#獲取使用者帳號訊息
 getUser(){
 	port=`jq '.server_port' ${config_user_file}`
 	password=`jq '.password' ${config_user_file} | sed 's/^.//;s/.$//'`
@@ -433,9 +433,9 @@ getUser(){
 	speed_limit_per_con=`jq '.speed_limit_per_con' ${config_user_file}`
 	speed_limit_per_user=`jq '.speed_limit_per_user' ${config_user_file}`
 }
-# 设置 端口和密码
+# 設定 埠和密碼
 set_port_pass(){
-	#设置端口
+	#設定埠
 	while true
 	do
 	echo -e "${Info_input_port}"
@@ -453,15 +453,15 @@ set_port_pass(){
 		echo -e "${Errpr_input_num_error}"
 	fi
 	done
-	#设置密码
+	#設定密碼
 	echo "${Info_input_pass}:"
 	stty erase '^H' && read -p "(${Word_default}: doub.io):" sspwd
 	[[ -z "${sspwd}" ]] && sspwd="doub.io"
 	echo && echo ${Separator_1} && echo -e "	${Word_pass} : ${Green_font_prefix}${sspwd}${Font_color_suffix}" && echo ${Separator_1} && echo
 }
-# 设置 加密方式、协议和混淆等
+# 設定 加密方式、協議和混淆等
 set_others(){
-	#设置加密方式
+	#設定加密方式
 	echo "${Info_input_method}"
 	echo " 1. rc4-md5"
 	echo " 2. aes-128-ctr"
@@ -495,7 +495,7 @@ set_others(){
 		ssmethod="aes-128-ctr"
 	fi
 	echo && echo ${Separator_1} && echo -e "	${Word_method} : ${Green_font_prefix}${ssmethod}${Font_color_suffix}" && echo ${Separator_1} && echo
-	#设置协议
+	#設定協議
 	echo "${Info_input_protocol}"
 	echo " 1. origin"
 	echo " 2. auth_sha1_v4"
@@ -516,7 +516,7 @@ set_others(){
 		ssprotocol="auth_sha1_v4"
 	fi
 	echo && echo ${Separator_1} && echo -e "	${Word_protocol} : ${Green_font_prefix}${ssprotocol}${Font_color_suffix}" && echo ${Separator_1} && echo
-	#设置混淆
+	#設定混淆
 	echo "${Info_input_obfs}"
 	echo " 1. plain"
 	echo " 2. http_simple"
@@ -540,7 +540,7 @@ set_others(){
 		ssobfs="tls1.2_ticket_auth"
 	fi
 	echo && echo ${Separator_1} && echo -e "	${Word_obfs} : ${Green_font_prefix}${ssobfs}${Font_color_suffix}" && echo ${Separator_1} && echo
-	#询问是否设置 ${Word_obfs} 兼容原版
+	#詢問是否設定 ${Word_obfs} 相容原版
 	if [[ ${ssprotocol} != "origin" ]]; then
 		if [[ ${ssobfs} != "plain" ]]; then
 			if [[ ${ssprotocol} == "verify_sha1" ]] || [[ ${ssprotocol} == "auth_sha1_v2" ]]  || [[ ${ssprotocol} == "auth_sha1_v4" ]]; then
@@ -587,7 +587,7 @@ set_others(){
 		fi
 		done
 	fi
-	# 设置单线程限速
+	# 設定單執行緒限速
 	while true
 	do
 	echo
@@ -607,7 +607,7 @@ set_others(){
 		echo "${Errpr_input_num_error}"
 	fi
 	done
-	# 设置端口总限速
+	# 設定埠總限速
 	while true
 	do
 	echo
@@ -628,11 +628,11 @@ set_others(){
 	fi
 	done
 }
-#设置用户账号信息
+#設定使用者帳號訊息
 setUser(){
 	set_port_pass
 	set_others
-	#最后确认
+	#最後確認
 	[[ "${ssprotocol_param}" == "" ]] && ssprotocol_param="0(${Word_unlimited})"
 	echo && echo ${Separator_1}
 	echo " ${Prompt_check_if_the_configuration_is_incorrect}" && echo
@@ -680,7 +680,7 @@ ssr_link_qr_1(){
 	SSRQRcode="http://doub.pw/qr/qr.php?text="${SSRurl}
 	ssr_link="${Word_ssr_like} : ${Green_font_prefix}${SSRurl}${Font_color_suffix} \n${Word_ssr_qr_code} : ${Green_font_prefix}${SSRQRcode}${Font_color_suffix} \n "
 }
-#显示用户账号信息
+#顯示使用者帳號訊息
 viewUser(){
 	SSR_install_status
 	PID=`ps -ef |grep -v grep | grep server.py |awk '{print $2}'`
@@ -761,7 +761,7 @@ viewUser(){
 		echo -e " ${Word_port_total_speed_limit} : ${Green_font_prefix}${speed_limit_per_user} KB/S${Font_color_suffix}"
 		echo
 		user_total=`jq '.port_password' ${config_user_file} | sed '$d' | sed "1d" | wc -l`
-		[[ ${socat_total} = "0" ]] && echo -e "${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 没有发现 多端口用户，请检查 !" && exit 1
+		[[ ${socat_total} = "0" ]] && echo -e "${Red_font_prefix} [${Word_error}] ${Font_color_suffix} 沒有發現 多埠使用者，請檢查 !" && exit 1
 		user_id=0
 		check_sys
 		if [[ ${release} = "centos" ]]; then
@@ -881,7 +881,7 @@ JQ_install(){
 	fi
 }
 rc.local_ss_set(){
-#添加开机启动
+#添加開機啟動
 	if [[ ${release} = "centos" ]]; then
 		chmod +x /etc/rc.d/rc.local
 		#sed -i '/cd \/etc\/shadowsocksr\/shadowsocks\//d' /etc/rc.d/rc.local
@@ -914,7 +914,7 @@ rc.local_ss_del(){
 	fi
 }
 rc.local_serverspeed_set(){
-#添加开机启动
+#添加開機啟動
 	if [[ ${release} = "centos" ]]; then
 		chmod +x /etc/rc.d/rc.local
 		sed -i '/serverspeeder/d' /etc/rc.d/rc.local
@@ -943,7 +943,7 @@ iptables_del(){
 	iptables -D INPUT -m state --state NEW -m udp -p udp --dport ${port} -j ACCEPT
 }
 iptables_set(){
-	#删除旧端口的防火墙规则，添加新端口的规则
+	#刪除舊埠的防火牆規則，添加新埠的規則
 	iptables_del
 	iptables_add
 }
@@ -963,12 +963,12 @@ set_config_speed_limit_per(){
 	sed -i 's/"speed_limit_per_con": '$(echo ${speed_limit_per_con})'/"speed_limit_per_con": '$(echo ${ssspeed_limit_per_con})'/g' ${config_user_file}
 	sed -i 's/"speed_limit_per_user": '$(echo ${speed_limit_per_user})'/"speed_limit_per_user": '$(echo ${ssspeed_limit_per_user})'/g' ${config_user_file}
 }
-#安装ShadowsocksR
+#安裝ShadowsocksR
 installSSR(){
 	[[ -e $config_user_file ]] && echo -e "${Error_ssr_installed}" && exit 1
 	setUser
 	check_sys
-	# 系统判断
+	# 系統判斷
 	if [[ ${release} = "debian" ]]; then
 		debian_apt
 	elif [[ ${release} = "ubuntu" ]]; then
@@ -978,7 +978,7 @@ installSSR(){
 	else
 		echo -e "${Error_does_not_support_the_system}" && exit 1
 	fi
-	#修改DNS为8.8.8.8
+	#修改DNS為8.8.8.8
 	echo "nameserver 8.8.8.8" > /etc/resolv.conf
 	echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 	cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -988,7 +988,7 @@ installSSR(){
 	env GIT_SSL_NO_VERIFY=true git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git
 	[[ ! -e ${config_file} ]] && echo -e "${Error_ssr_download_failed}" && exit 1
 	cp ${config_file} ${config_user_file}
-	#修改配置文件的密码 端口 加密方式
+	#修改設定檔案的密碼 埠 加密方式
 	cat > ${config_user_file}<<-EOF
 {
     "server": "0.0.0.0",
@@ -1013,10 +1013,10 @@ installSSR(){
 }
 EOF
 
-	#添加新端口的规则
+	#添加新埠的規則
 	iptables_add
 	rc.local_ss_set
-	#启动SSR服务端，并判断是否启动成功
+	#啟動SSR服務端，並判斷是否啟動成功
 	cd ${ssr_ss_file}
 	nohup python server.py a >> ssserver.log 2>&1 &
 	sleep 2s
@@ -1033,7 +1033,7 @@ EOF
 	fi
 }
 installLibsodium(){
-	# 系统判断
+	# 系統判斷
 	check_sys
 	if [[ ${release}  != "debian" ]]; then
 		if [[ ${release}  != "ubuntu" ]]; then
@@ -1058,14 +1058,14 @@ installLibsodium(){
 	echo -e "https://doub.io/ss-jc42/"
 	echo && echo ${Separator_1}
 }
-#修改单端口用户配置
+#修改單埠使用者設定
 modifyUser(){
 	SSR_install_status
 	now_mode=`jq '.port_password' ${config_user_file}`
 	[[ "${now_mode}" != "null" ]] && echo -e "${Error_the_current_mode_is_multi_port}" && exit 1
 	getUser
 	setUser
-	#修改配置文件的密码 ${Word_port} 加密方式
+	#修改設定檔案的密碼 ${Word_port} 加密方式
 	set_config_port_pass
 	set_config_method_obfs_protocol
 	set_config_protocol_param
@@ -1073,7 +1073,7 @@ modifyUser(){
 	iptables_set
 	RestartSSR
 }
-#手动修改用户配置
+#手動修改使用者設定
 manuallyModifyUser(){
 	SSR_install_status
 	port=`jq '.server_port' ${config_user_file}`
@@ -1082,7 +1082,7 @@ manuallyModifyUser(){
 	iptables_set
 	RestartSSR
 }
-#卸载ShadowsocksR
+#移除ShadowsocksR
 UninstallSSR(){
 	[[ ! -e $config_file ]] && echo -e "${Error_not_install_ssr}" && exit 1
 	echo "${Info_uninstall_ssr}"
@@ -1090,7 +1090,7 @@ UninstallSSR(){
 	stty erase '^H' && read -p "(${Word_default}: n):" unyn
 	[[ -z ${unyn} ]] && unyn="n"
 	if [[ ${unyn} == [Yy] ]]; then
-#停止ShadowsocksR服务端并删除防火墙规则，删除Shadowsocks文件夹。
+#停止ShadowsocksR服務端並刪除防火牆規則，刪除Shadowsocks資料夾。
 		PID=`ps -ef |grep -v grep | grep server.py |awk '{print $2}'`
 		[[ ! -z "${PID}" ]] && kill -9 ${PID}
 		cron_ssr=`crontab -l | grep "${ssr_file}/${auto_restart_cron}" | wc -l`
@@ -1113,7 +1113,7 @@ UninstallSSR(){
 				iptables_del
 			done
 		fi
-#取消开机启动
+#取消開機啟動
 		check_sys
 		rc.local_ss_del
 		rm -rf ${ssr_file} && rm -rf ${Libsodiumr_file} && rm -rf ${Libsodiumr_file}.tar.gz
@@ -1129,7 +1129,7 @@ UpdateSSR(){
 	git pull
 	RestartSSR
 }
-# 切换 单/多端口模式
+# 切換 單/多埠模式
 Port_mode_switching(){
 	SSR_install_status
 	now_mode=`jq '.port_password' ${config_user_file}`
@@ -1246,7 +1246,7 @@ List_multi_port_user(){
 	echo -e "${Prompt_total_number_of_users} ${Green_font_prefix} "${user_total}" ${Font_color_suffix} "
 	echo -e ${user_list_all}
 }
-# 添加 多端口用户配置
+# 添加 多埠使用者設定
 Add_multi_port_user(){
 	SSR_install_status
 	now_mode=`jq '.port_password' ${config_user_file}`
@@ -1258,7 +1258,7 @@ Add_multi_port_user(){
 	RestartSSR
 	echo -e "${Green_font_prefix} [${Word_info}] ${Font_color_suffix} ${Prompt_add_multi_port_user} ${Green_font_prefix} [${Word_port}: ${ssport} , ${Word_pass}: ${sspwd}] ${Font_color_suffix} "
 }
-# 修改 多端口用户配置
+# 修改 多埠使用者設定
 Modify_multi_port_user(){
 	SSR_install_status
 	now_mode=`jq '.port_password' ${config_user_file}`
@@ -1302,7 +1302,7 @@ Modify_multi_port_user(){
 		echo -e "${Prompt_method_protocol_obfs_modified}"
 	fi
 }
-# 删除 多端口用户配置
+# 刪除 多埠使用者設定
 Del_multi_port_user(){
 	SSR_install_status
 	now_mode=`jq '.port_password' ${config_user_file}`
@@ -1338,7 +1338,7 @@ Del_multi_port_user(){
 	fi
 	done
 }
-# 显示用户连接信息
+# 顯示使用者連接訊息
 View_user_connection_info(){
 	SSR_install_status
 	check_sys
@@ -1418,7 +1418,7 @@ SSR_start(){
 		echo -e "${Error_startup_failed}"
 	fi
 }
-#启动ShadowsocksR
+#啟動ShadowsocksR
 StartSSR(){
 	SSR_install_status
 	PID=`ps -ef |grep -v grep | grep server.py |awk '{print $2}'`
@@ -1438,20 +1438,20 @@ StopSSR(){
 		echo -e "${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR ${Word_stop_failing} !"
 	fi
 }
-#重启ShadowsocksR
+#重啟ShadowsocksR
 RestartSSR(){
 	SSR_install_status
 	PID=`ps -ef |grep -v grep | grep server.py |awk '{print $2}'`
 	[[ ! -z "${PID}" ]] && kill -9 ${PID}
 	SSR_start
 }
-#查看 ShadowsocksR 日志
+#查看 ShadowsocksR 日誌
 TailSSR(){
 	[[ ! -e ${ssr_ss_file}"/ssserver.log" ]] && echo -e "${Error_no_log_found}" && exit 1
 	echo && echo -e "${Prompt_log}" && echo
 	tail -f ${ssr_ss_file}"/ssserver.log"
 }
-#查看 ShadowsocksR 状态
+#查看 ShadowsocksR 狀態
 StatusSSR(){
 	SSR_install_status
 	PID=`ps -ef |grep -v grep | grep server.py |awk '{print $2}'`
@@ -1461,11 +1461,11 @@ StatusSSR(){
 		echo ${Separator_1} && echo && echo -e "	ShadowsocksR ${Word_running} (PID: ${PID}) !" && echo && echo ${Separator_1}
 	fi
 }
-#安装锐速
+#安裝銳速
 installServerSpeeder(){
 	[[ -e "/serverspeeder" ]] && echo -e "${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ${Word_serverspeeder} ${Word_installed} !" && exit 1
 	cd /root
-	#借用91yun.rog的开心版锐速
+	#借用91yun.rog的開心版銳速
 	wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/serverspeeder/master/serverspeeder-all.sh
 	bash serverspeeder-all.sh
 	sleep 2s
@@ -1478,22 +1478,22 @@ installServerSpeeder(){
 		echo -e "${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ${Word_serverspeeder} ${Word_installation_failed} !" && exit 1
 	fi
 }
-#查看锐速状态
+#查看銳速狀態
 StatusServerSpeeder(){
 	[[ ! -e "/serverspeeder" ]] && echo -e "${Error_server_speeder_not_installed}" && exit 1
 	/serverspeeder/bin/serverSpeeder.sh status
 }
-#停止锐速
+#停止銳速
 StopServerSpeeder(){
 	[[ ! -e "/serverspeeder" ]] && echo -e "${Error_server_speeder_not_installed}" && exit 1
 	/serverspeeder/bin/serverSpeeder.sh stop
 }
-#重启锐速
+#重啟銳速
 RestartServerSpeeder(){
 	[[ ! -e "/serverspeeder" ]] && echo -e "${Error_server_speeder_not_installed}" && exit 1
 	/serverspeeder/bin/serverSpeeder.sh restart
 }
-#卸载锐速
+#移除銳速
 UninstallServerSpeeder(){
 	[[ ! -e "/serverspeeder" ]] && echo -e "${Error_server_speeder_not_installed}" && exit 1
 	echo "${Info_uninstall_server}"
@@ -1603,9 +1603,9 @@ nohup python server.py a >> ssserver.log 2>&1 &
 sleep 2s
 PID=`ps -ef |grep -v grep | grep server.py |awk '{print $2}'`
 if [ ! -z "${PID}" ]; then
-	echo -e "	ShadowsocksR 重启完成 !"
+	echo -e "	ShadowsocksR 重啟完成 !"
 else
-	echo -e "${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 启动失败 !"
+	echo -e "${Red_font_prefix} [${Word_error}] ${Font_color_suffix} ShadowsocksR 啟動失敗 !"
 fi
 EOF
 	if [[ -s ${ssr_file}"/"${auto_restart_cron} ]]; then
@@ -1632,7 +1632,7 @@ EOF
 		echo -e "${Error_set_corn_Write_failed}"
 	fi
 }
-# 设置设备数
+# 設定設備數
 Client_limit(){
 	SSR_install_status
 	getUser
@@ -1670,7 +1670,7 @@ Client_limit(){
 }
 Speed_limit(){
 	SSR_install_status
-	# 设置单线程限速
+	# 設定單執行緒限速
 	while true
 	do
 	echo
@@ -1690,7 +1690,7 @@ Speed_limit(){
 		echo "${Errpr_input_num_error}"
 	fi
 	done
-	# 设置端口总限速
+	# 設定埠總限速
 	while true
 	do
 	echo
@@ -1737,7 +1737,7 @@ Switch_language(){
 	fi
 }
 Language
-#菜单判断
+#選單判斷
 echo
 echo && echo "${Menu_prompt_1}" && echo
 echo -e "${Menu_options}"
