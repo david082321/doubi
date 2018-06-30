@@ -47,7 +47,7 @@ check_pid(){
 }
 Download_dowsdns(){
 	cd "/usr/local"
-	wget -N --no-check-certificate "https://softs.loan/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/PC/dowsDNS/Linux%2BMac/dowsDNS.zip"
+	wget -N --no-check-certificate "https://github.com/david082321/dowsDNS/archive/beta.zip"
 	[[ ! -e "dowsDNS.zip" ]] && echo -e "${Error} DowsDNS 下載失敗 !" && exit 1
 	unzip dowsDNS.zip && rm -rf dowsDNS.zip
 	[[ ! -e "dowsDNS-master" ]] && echo -e "${Error} DowsDNS 解壓失敗 !" && exit 1
